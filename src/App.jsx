@@ -85,6 +85,17 @@ export default function App() {
                   Based in Singapore today, Chew builds architectures that convert high-dimensional uncertainty into governed, auditable
                   workflows—so organisations can reason and act with continuity over time.
                 </p>
+                <div className="pt-2">
+                  <div className="text-sm font-medium text-zinc-200">High-energy physics to institutional scale</div>
+                  <div className="mt-3">
+                    Chew’s technical formation began in high-energy physics computing, building event reconstruction pipelines and probabilistic
+                    inference under tight latency and memory constraints. Later, as a founding architect of Aladdin, he helped scale
+                    deterministic valuation and risk graphs where auditability and reproducibility are prerequisites for trust. Today at Keppel
+                    Ltd, a global asset manager and operator based in Singapore, he leads the development of KAI (Keppel AI)—a governed platform
+                    and operating system that embeds knowledge workflows across investment, research, and operations. KAI prioritises full
+                    traceability: controlled data access, auditable inputs and outputs, and human escalation for high-stakes decisions.
+                  </div>
+                </div>
               </div>
             </div>
             <div className="space-y-4">
@@ -126,18 +137,6 @@ export default function App() {
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-
-          <div className="mt-4 rounded-2xl border border-zinc-800 bg-zinc-950/40 p-6">
-            <div className="text-sm font-medium text-zinc-200">High-energy physics to institutional scale</div>
-            <div className="mt-3 text-sm leading-relaxed text-zinc-400">
-              Chew’s technical formation began in high-energy physics computing, building event reconstruction pipelines and probabilistic
-              inference under tight latency and memory constraints. Later, as a founding architect of Aladdin, he helped scale
-              deterministic valuation and risk graphs where auditability and reproducibility are prerequisites for trust. Today at Keppel
-              Ltd, a global asset manager and operator based in Singapore, he leads the development of KAI (Keppel AI)—a governed platform
-              and operating system that embeds knowledge workflows across investment, research, and operations. KAI prioritises full
-              traceability: controlled data access, auditable inputs and outputs, and human escalation for high-stakes decisions.
             </div>
           </div>
         </section>
