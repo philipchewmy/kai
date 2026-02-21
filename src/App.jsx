@@ -87,20 +87,43 @@ export default function App() {
                 </p>
               </div>
             </div>
-            <div className="rounded-2xl border border-zinc-800 bg-zinc-950/40 p-6">
-              <div className="text-sm font-medium text-zinc-200">Career arcs</div>
-              <div className="mt-3 space-y-3 text-sm text-zinc-400">
-                <div>
-                  <div className="text-zinc-200">BlackRock</div>
-                  <div className="mt-1">Founding architect of Aladdin—the global asset management industry’s gold-standard operating platform, safeguarding $40 trillion (≈10% of the world’s net financial assets in 2025)</div>
+            <div className="space-y-4">
+              <div id="credentials" className="rounded-2xl border border-zinc-800 bg-zinc-950/40 p-6">
+                <div className="text-sm font-medium text-zinc-200">Credentials</div>
+                <div className="mt-3 space-y-3 text-sm text-zinc-400">
+                  <div>
+                    <div className="flex items-center gap-2 text-zinc-200">
+                      <GraduationCap size={16} /> Education
+                    </div>
+                    <div className="mt-2 space-y-1">
+                      <div>Undergraduate: Electrical Engineering (Moore School), Finance (Wharton), Physics (School of Arts & Sciences), University of Pennsylvania</div>
+                      <div>Master of Science: Electrical Engineering and Computer Science, MIT</div>
+                    </div>
+                  </div>
+                  <div>
+                    <div className="flex items-center gap-2 text-zinc-200">
+                      <Award size={16} /> Patents
+                    </div>
+                    <div className="mt-2">Two U.S. patents in portfolio management and credit risk management</div>
+                  </div>
                 </div>
-                <div>
-                  <div className="text-zinc-200">Grab Financial Group</div>
-                  <div className="mt-1">Grab is a leading Singapore-based superapp across Southeast Asia (8 countries) spanning ride-hailing, food/grocery delivery, and digital financial services; launched GrabInsure, GrabInvest, GrabLink; US$300M Series A</div>
-                </div>
-                <div>
-                  <div className="text-zinc-200">Keppel Ltd</div>
-                  <div className="mt-1">A global asset manager and operator based in Singapore; leading AI & digital transformation and building KAI</div>
+              </div>
+
+              <div className="rounded-2xl border border-zinc-800 bg-zinc-950/40 p-6">
+                <div className="text-sm font-medium text-zinc-200">Career arcs</div>
+                <div className="mt-3 space-y-3 text-sm text-zinc-400">
+                  <div>
+                    <div className="text-zinc-200">BlackRock</div>
+                    <div className="mt-1">Founding architect of Aladdin—the global asset management industry’s gold-standard operating platform, safeguarding $40 trillion (≈10% of the world’s net financial assets in 2025)</div>
+                  </div>
+                  <div>
+                    <div className="text-zinc-200">Grab Financial Group</div>
+                    <div className="mt-1">Grab is a leading Singapore-based superapp across Southeast Asia (8 countries) spanning ride-hailing, food/grocery delivery, and digital financial services; launched GrabInsure, GrabInvest, GrabLink; US$300M Series A</div>
+                  </div>
+                  <div>
+                    <div className="text-zinc-200">Keppel Ltd</div>
+                    <div className="mt-1">A global asset manager and operator based in Singapore; leading AI & digital transformation and building KAI</div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -334,29 +357,6 @@ export default function App() {
             <div className="mt-3 text-sm leading-relaxed text-zinc-400">
               Deterministic platforms delivered control but left interpretation as a bottleneck. Probabilistic systems expand adaptive
               capacity but demand new forms of observability and governance. The knowledge layer is one more stratum—one more brick.
-            </div>
-          </div>
-        </section>
-
-        <section id="credentials" className="py-14">
-          <h2 className="text-xl font-semibold">Credentials</h2>
-          <div className="mt-4 grid gap-4 md:grid-cols-2">
-            <div className="rounded-2xl border border-zinc-800 bg-zinc-950/40 p-6">
-              <div className="flex items-center gap-2 text-sm font-medium text-zinc-200">
-                <GraduationCap size={16} /> Education
-              </div>
-              <div className="mt-3 space-y-2 text-sm text-zinc-400">
-                <div>Undergraduate: Electrical Engineering (Moore School), Finance (Wharton), Physics (School of Arts & Sciences), University of Pennsylvania</div>
-                <div>Master of Science: Electrical Engineering and Computer Science, MIT</div>
-              </div>
-            </div>
-            <div className="rounded-2xl border border-zinc-800 bg-zinc-950/40 p-6">
-              <div className="flex items-center gap-2 text-sm font-medium text-zinc-200">
-                <Award size={16} /> Patents
-              </div>
-              <div className="mt-3 space-y-2 text-sm text-zinc-400">
-                <div>Two U.S. patents in portfolio management and credit risk management</div>
-              </div>
             </div>
           </div>
         </section>
