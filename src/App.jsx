@@ -364,9 +364,25 @@ export default function App() {
         <section id="contact" className="py-14">
           <h2 className="text-xl font-semibold">Contact</h2>
           <div className="mt-4 rounded-2xl border border-zinc-800 bg-zinc-950/40 p-6">
-            <p className="text-sm text-zinc-300">
-              Add an email address and preferred channels (LinkedIn, X, etc.). For a working contact form, configure where messages should be sent.
-            </p>
+            <div className="grid gap-3 text-sm text-zinc-300 sm:grid-cols-2">
+              <a
+                href="mailto:philip.chew@keppel.com"
+                className="rounded-xl border border-zinc-800 bg-zinc-950/20 px-4 py-3 hover:bg-zinc-900"
+              >
+                <div className="text-xs font-medium text-zinc-400">Email</div>
+                <div className="mt-1 text-zinc-100">philip.chew@keppel.com</div>
+              </a>
+
+              <a
+                href="https://www.linkedin.com/in/philip-c-04a0081"
+                target="_blank"
+                rel="noreferrer"
+                className="rounded-xl border border-zinc-800 bg-zinc-950/20 px-4 py-3 hover:bg-zinc-900"
+              >
+                <div className="text-xs font-medium text-zinc-400">LinkedIn</div>
+                <div className="mt-1 text-zinc-100">www.linkedin.com/in/philip-c-04a0081</div>
+              </a>
+            </div>
           </div>
         </section>
 
