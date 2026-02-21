@@ -4,9 +4,9 @@ import { motion } from 'framer-motion'
 export default function App() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-zinc-950 via-zinc-950 to-zinc-900 text-zinc-50">
-      <header className="mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-6">
+      <header className="mx-auto flex w-full max-w-6xl flex-col items-start justify-between gap-3 px-6 py-6 md:flex-row md:items-center">
         <div className="text-sm font-medium tracking-wide text-zinc-200">Philip Chew</div>
-        <nav className="flex items-center gap-6 text-sm text-zinc-300">
+        <nav className="flex flex-wrap items-center justify-start gap-x-6 gap-y-2 text-sm text-zinc-300 md:flex-nowrap md:justify-end">
           <a className="hover:text-white" href="#biography">Biography</a>
           <a className="hover:text-white" href="#paradigms">Paradigms</a>
           <a className="hover:text-white" href="#kai">KAI</a>
