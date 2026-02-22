@@ -5,7 +5,9 @@ export default function App() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-zinc-950 via-zinc-950 to-zinc-900 text-zinc-50">
       <header className="mx-auto flex w-full max-w-6xl flex-col items-start justify-between gap-3 px-6 py-6 md:flex-row md:items-center">
-        <div className="text-sm font-medium tracking-wide text-zinc-200">Philip Chew</div>
+        <div className="text-xl font-semibold tracking-tight text-zinc-300 md:text-3xl">
+          Philip Chew.{"\u00A0\u00A0\u00A0\u00A0"}KAI OS platform.
+        </div>
         <nav className="flex flex-wrap items-center justify-start gap-x-6 gap-y-2 text-sm text-zinc-300 md:flex-nowrap md:justify-end">
           <a className="hover:text-white" href="#biography">Biography</a>
           <a className="hover:text-white" href="#paradigms">Paradigms</a>
@@ -25,8 +27,16 @@ export default function App() {
                 transition={{ duration: 0.6 }}
                 className="text-balance text-4xl font-semibold leading-tight tracking-tight md:text-6xl"
               >
-                Architect of the knowledge layer.
+                Architecting the Knowledge Layer.
               </motion.h1>
+              <motion.p
+                initial={{ opacity: 0, y: 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.06 }}
+                className="mt-4 max-w-2xl text-pretty text-base font-medium leading-relaxed text-zinc-200 md:text-lg"
+              >
+                No lock-ins. Choice. Control for your Enterprise.
+              </motion.p>
               <motion.p
                 initial={{ opacity: 0, y: 14 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -220,6 +230,18 @@ export default function App() {
                   The pilots demonstrated measurable productivity gains, analytical consistency, and full audit traceability while
                   maintaining strict data lineage, access controls, and human-in-the-loop escalation. This shifted the conversation from
                   hypothetical capability to observed operational impact.
+                </p>
+                <p>
+                  In 2025, Keppel undertook the build of the KAI OS platform under Chew’s leadership. The platform, along with a first
+                  generation of AI agents and applications, was rolled into production by the end of 2025. Keppel expects all 4,000 employees
+                  to be live on KAI by 3Q 2026, with more agents than employees by the end of 2026.
+                </p>
+                <p>
+                  Chew and his colleagues at Keppel believe they are on the right trajectory to solve a contemporaneous pain point for
+                  enterprises seeking a meaningful way to surf the cognitive AI wave: efficient, governed intelligence—rising and harnessed
+                  for people, culture, and strategy. As Chew helped BlackRock unleash Aladdin to the global asset management industry from the
+                  1990s into the 2000s, Keppel is aiming to do the same with KAI—this time with broader applicability across knowledge-economy
+                  enterprises.
                 </p>
               </div>
             </div>
