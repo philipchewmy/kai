@@ -17,54 +17,85 @@ export default function App() {
 
       <main className="mx-auto w-full max-w-6xl px-6">
         <section className="py-20">
-          <motion.h1
-            initial={{ opacity: 0, y: 14 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-balance text-4xl font-semibold leading-tight tracking-tight md:text-6xl"
-          >
-            Architect of the knowledge layer.
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: 14 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="mt-6 max-w-2xl text-pretty text-base leading-relaxed text-zinc-300 md:text-lg"
-          >
-            From high-energy physics computing to deterministic institutional platforms and now governed, agent-based enterprise
-            intelligence, Chew designs architectures that transform complex, noisy data into auditable and scalable decision processes.
-          </motion.p>
+          <div className="grid gap-10 md:grid-cols-2 md:items-start">
+            <div>
+              <motion.h1
+                initial={{ opacity: 0, y: 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+                className="text-balance text-4xl font-semibold leading-tight tracking-tight md:text-6xl"
+              >
+                Architect of the knowledge layer.
+              </motion.h1>
+              <motion.p
+                initial={{ opacity: 0, y: 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+                className="mt-6 max-w-2xl text-pretty text-base leading-relaxed text-zinc-300 md:text-lg"
+              >
+                From high-energy physics computing to deterministic institutional platforms and now governed, agent-based enterprise
+                intelligence, Chew designs architectures that transform complex, noisy data into auditable and scalable decision processes.
+              </motion.p>
 
-          <motion.p
-            initial={{ opacity: 0, y: 14 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.15 }}
-            className="mt-4 max-w-3xl text-pretty text-base leading-relaxed text-zinc-300"
-          >
-            Chew’s proposition: KAI OS can be the middle layer—an enterprise knowledge layer—that prevents intelligence vendor lock-in by
-            letting organisations evolve the combination of models they use over time, while grounding intelligence in how each community
-            defines and lives its workflows.
-          </motion.p>
+              <motion.p
+                initial={{ opacity: 0, y: 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.15 }}
+                className="mt-4 max-w-3xl text-pretty text-base leading-relaxed text-zinc-300"
+              >
+                Chew’s proposition: KAI OS can be the middle layer—an enterprise knowledge layer—that prevents intelligence vendor lock-in by
+                letting organisations evolve the combination of models they use over time, while grounding intelligence in how each community
+                defines and lives its workflows.
+              </motion.p>
 
-          <motion.div
-            initial={{ opacity: 0, y: 14 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="mt-10 flex flex-col gap-3 sm:flex-row"
-          >
-            <a
-              href="#biography"
-              className="inline-flex items-center justify-center gap-2 rounded-xl bg-white px-5 py-3 text-sm font-medium text-zinc-950 shadow-sm transition hover:bg-zinc-200"
+              <motion.div
+                initial={{ opacity: 0, y: 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="mt-10 flex flex-col gap-3 sm:flex-row"
+              >
+                <a
+                  href="#biography"
+                  className="inline-flex items-center justify-center gap-2 rounded-xl bg-white px-5 py-3 text-sm font-medium text-zinc-950 shadow-sm transition hover:bg-zinc-200"
+                >
+                  Read the biography <ArrowRight size={16} />
+                </a>
+                <a
+                  href="#contact"
+                  className="inline-flex items-center justify-center gap-2 rounded-xl border border-zinc-700 bg-transparent px-5 py-3 text-sm font-medium text-zinc-100 transition hover:bg-zinc-900"
+                >
+                  Get in touch <Mail size={16} />
+                </a>
+              </motion.div>
+            </div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.15 }}
+              className="overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-950/40"
             >
-              Read the biography <ArrowRight size={16} />
-            </a>
-            <a
-              href="#contact"
-              className="inline-flex items-center justify-center gap-2 rounded-xl border border-zinc-700 bg-transparent px-5 py-3 text-sm font-medium text-zinc-100 transition hover:bg-zinc-900"
-            >
-              Get in touch <Mail size={16} />
-            </a>
-          </motion.div>
+              <div className="flex items-center justify-between gap-4 border-b border-zinc-800 px-4 py-3">
+                <div className="text-xs font-medium text-zinc-300">High-energy physics particle tracks</div>
+                <a
+                  href="/hep-particle-tracks.png"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-xs text-zinc-400 hover:text-zinc-200"
+                >
+                  Open full size
+                </a>
+              </div>
+              <a href="/hep-particle-tracks.png" target="_blank" rel="noreferrer" className="block">
+                <img
+                  src="/hep-particle-tracks.png"
+                  alt="High-energy physics particle tracks"
+                  className="h-auto w-full"
+                  loading="lazy"
+                />
+              </a>
+            </motion.div>
+          </div>
         </section>
 
         <section id="biography" className="py-14">
