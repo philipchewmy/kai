@@ -27,7 +27,7 @@ export default function App() {
                 transition={{ duration: 0.6 }}
                 className="text-balance text-4xl font-semibold leading-tight tracking-tight md:text-6xl"
               >
-                Architecting the Knowledge Layer.
+                Architecting your Knowledge Layer
               </motion.h1>
               <motion.p
                 initial={{ opacity: 0, y: 14 }}
