@@ -175,7 +175,7 @@ export default function App() {
                 <div className="mt-3 space-y-3 text-sm text-zinc-400">
                   <div>
                     <div className="text-zinc-200">BlackRock</div>
-                    <div className="mt-1">Founding architect of Aladdin—the global asset management industry’s gold-standard operating platform, safeguarding $40 trillion (≈10% of the world’s net financial assets in 2025)</div>
+                    <div className="mt-1">Founding architect of Aladdin—the global asset management industry’s gold-standard operating platform, safeguarding $40 trillion ≈10% of the world’s net financial assets in 2025</div>
                   </div>
                   <div>
                     <div className="text-zinc-200">Grab Financial Group</div>
