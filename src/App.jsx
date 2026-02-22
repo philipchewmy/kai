@@ -53,9 +53,7 @@ export default function App() {
                 transition={{ duration: 0.6, delay: 0.15 }}
                 className="mt-4 max-w-3xl text-pretty text-base leading-relaxed text-zinc-300"
               >
-                Our proposition: KAI OS platform is engineered to your knowledge layer as the middle layer—an enterprise knowledge layer—that prevents intelligence vendor lock-in by
-                letting organisations evolve the combination of models they use over time, while grounding intelligence in how each community
-                defines and lives its workflows.
+                KAI OS platform is engineered to be your enterprise knowledge layer that lets you evolve the intelligence architecture your enterprise yearns for, and helps you avoid vendor lock-ins, while grounding your intelligence in every workflow that matters.
               </motion.p>
 
               <motion.p
@@ -140,7 +138,7 @@ export default function App() {
                   <div className="text-sm font-medium text-zinc-200">High-energy physics to institutional scale</div>
                   <div className="mt-3">
                     Philip’s technical formation began in high-energy physics computing, building event reconstruction pipelines and probabilistic
-                    inference under tight latency and memory constraints. Later, as a founding architect of Aladdin, he helped scale
+                    inference under tight latency and memory constraints at Los Alamos National Laboratory, CERN and Fermilab. Later, as a founding architect of Aladdin at Blackrock, he helped scale
                     deterministic valuation and risk graphs where auditability and reproducibility are prerequisites for trust. Today at Keppel
                     Ltd, a global asset manager and operator based in Singapore, he leads the development of KAI (Keppel AI)—a governed platform
                     and operating system that embeds knowledge workflows across investment, research, and operations. KAI prioritises full
@@ -160,6 +158,7 @@ export default function App() {
                     <div className="mt-2 space-y-1">
                       <div>Undergraduate: Electrical Engineering (Moore School), Finance (Wharton), Physics (School of Arts & Sciences), University of Pennsylvania</div>
                       <div>Master of Science: Electrical Engineering and Computer Science, MIT</div>
+                      <div>Winner 18.335 matrix multiplication speed contest in Spring 1996.</div>
                     </div>
                   </div>
                   <div>
