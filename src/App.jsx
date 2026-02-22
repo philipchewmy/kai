@@ -35,7 +35,7 @@ export default function App() {
                 transition={{ duration: 0.6, delay: 0.06 }}
                 className="mt-4 max-w-2xl text-pretty text-base font-medium leading-relaxed text-zinc-200 md:text-lg"
               >
-                No lock-ins. Choice. Control for your Enterprise.
+                No lock-ins. Choice. Control for your enterprise.
               </motion.p>
               <motion.p
                 initial={{ opacity: 0, y: 14 }}
@@ -53,7 +53,7 @@ export default function App() {
                 transition={{ duration: 0.6, delay: 0.15 }}
                 className="mt-4 max-w-3xl text-pretty text-base leading-relaxed text-zinc-300"
               >
-                KAI OS platform is engineered to be your enterprise knowledge layer that lets you evolve the intelligence architecture your enterprise yearns for, and helps you avoid vendor lock-ins, while grounding your intelligence in every workflow that matters.
+                KAI OS platform is engineered to be your enterprise knowledge layer. It helps you evolve the intelligence architecture your enterprise needs, avoid vendor lock-ins, and ground intelligence in every workflow that matters.
               </motion.p>
 
               <motion.p
@@ -127,20 +127,20 @@ export default function App() {
                   Education ASEAN Scholarship and completed his A-levels at National Junior College.
                 </p>
                 <p>
-                  He later received one of two University of Pennsylvania scholarships awarded to outstanding international students—an
+                  He later received one of two University of Pennsylvania scholarships awarded to outstanding international students: an
                   early recognition that took him from Malaysia and Singapore to the frontiers of American physics and computation.
                 </p>
                 <p>
                   Based in Singapore today, Philip builds architectures that convert high-dimensional uncertainty into governed, auditable
-                  workflows—so organisations can reason and act with continuity over time.
+                  workflows - so organisations can reason and act with continuity over time.
                 </p>
                 <div className="pt-2">
                   <div className="text-sm font-medium text-zinc-200">High-energy physics to institutional scale</div>
                   <div className="mt-3">
                     Philip’s technical formation began in high-energy physics computing, building event reconstruction pipelines and probabilistic
-                    inference under tight latency and memory constraints at Los Alamos National Laboratory, CERN and Fermilab. Later, as a founding architect of Aladdin at Blackrock, he helped scale
+                    inference under tight latency and memory constraints at Los Alamos National Laboratory, CERN and Fermilab. Later, as a founding architect of Aladdin at BlackRock, he helped scale
                     deterministic valuation and risk graphs where auditability and reproducibility are prerequisites for trust. Today at Keppel
-                    Ltd, a global asset manager and operator based in Singapore, he leads the development of KAI (Keppel AI)—a governed platform
+                    Ltd, a global asset manager and operator based in Singapore, he leads the development of KAI (Keppel AI) - a governed platform
                     and operating system that embeds knowledge workflows across investment, research, and operations. KAI prioritises full
                     traceability: controlled data access, auditable inputs and outputs, and human escalation for high-stakes decisions.
                   </div>
@@ -175,7 +175,7 @@ export default function App() {
                 <div className="mt-3 space-y-3 text-sm text-zinc-400">
                   <div>
                     <div className="text-zinc-200">BlackRock</div>
-                    <div className="mt-1">Founding architect of Aladdin—the global asset management industry’s gold-standard operating platform, safeguarding $40 trillion ≈10% of the world’s net financial assets in 2025</div>
+                    <div className="mt-1">Founding architect of Aladdin - the global asset management industry’s gold-standard operating platform, safeguarding $40 trillion, or about ≈10% of the world’s net financial assets in 2025</div>
                   </div>
                   <div>
                     <div className="text-zinc-200">Grab Financial Group</div>
@@ -207,7 +207,7 @@ export default function App() {
                 <Layers size={16} /> Deterministic platforms (2000s–2010s)
               </div>
               <div className="mt-3 text-sm leading-relaxed text-zinc-400">
-                Identical inputs produce identical outputs: valuation graphs, factor decompositions, and data lineage for auditability—foundations for institutional trust at Aladdin scale (safeguarding $40T).
+                Identical inputs produce identical outputs: valuation graphs, factor decompositions, and data lineage for auditability - foundations for institutional trust at Aladdin scale (safeguarding $40T).
               </div>
             </div>
             <div className="rounded-2xl border border-zinc-800 bg-zinc-950/40 p-6">
@@ -232,7 +232,7 @@ export default function App() {
               <div className="mt-3 space-y-3 text-sm leading-relaxed text-zinc-400">
                 <p>
                   At Keppel Ltd, a global asset manager and operator based in Singapore, rather than advocate a sweeping platform overhaul,
-                  Philip proposed tightly scoped pilots designed to operate within existing control frameworks—each with explicit success
+                  Philip proposed tightly scoped pilots designed to operate within existing control frameworks - each with explicit success
                   criteria, governance guardrails, and stop conditions.
                 </p>
                 <p>
@@ -247,9 +247,9 @@ export default function App() {
                 </p>
                 <p>
                   Philip and his colleagues at Keppel believe they are on the right trajectory to solve a contemporaneous pain point for
-                  enterprises seeking a meaningful way to surf the cognitive AI wave: efficient, governed intelligence—rising and harnessed
+                  enterprises seeking a meaningful way to surf the cognitive AI wave: efficient, governed intelligence - rising and harnessed
                   for people, culture, and strategy. As Philip helped BlackRock unleash Aladdin to the global asset management industry from the
-                  1990s into the 2000s, Keppel is aiming to do the same with KAI—this time with broader applicability across knowledge-economy
+                  1990s into the 2000s, Keppel is aiming to do the same with KAI - this time with broader applicability across knowledge-economy
                   enterprises.
                 </p>
               </div>
@@ -417,7 +417,7 @@ export default function App() {
             <div className="text-sm font-medium text-zinc-200">Coda</div>
             <div className="mt-3 text-sm leading-relaxed text-zinc-400">
               Deterministic platforms delivered control but left interpretation as a bottleneck. Probabilistic systems expand adaptive
-              capacity but demand new forms of observability and governance. The knowledge layer is one more stratum—one more brick in our pursuit of enterprises that move at the speed of thought.
+              capacity but demand new forms of observability and governance. The knowledge layer is one more stratum - one more brick in our pursuit of enterprises that move at the speed of thought.
             </div>
           </div>
         </section>
