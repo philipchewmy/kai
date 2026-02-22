@@ -44,7 +44,7 @@ export default function App() {
                 className="mt-6 max-w-2xl text-pretty text-base leading-relaxed text-zinc-300 md:text-lg"
               >
                 From high-energy physics computing to deterministic institutional platforms and now governed, agent-based enterprise
-                intelligence, Chew designs architectures that transform complex, noisy data into auditable and scalable decision processes.
+                intelligence, Philip designs architectures that transform complex, noisy data into auditable and scalable decision processes.
               </motion.p>
 
               <motion.p
@@ -53,9 +53,19 @@ export default function App() {
                 transition={{ duration: 0.6, delay: 0.15 }}
                 className="mt-4 max-w-3xl text-pretty text-base leading-relaxed text-zinc-300"
               >
-                Chew’s proposition: KAI OS can be the middle layer—an enterprise knowledge layer—that prevents intelligence vendor lock-in by
+                Our proposition: KAI OS platform is engineered to your knowledge layer as the middle layer—an enterprise knowledge layer—that prevents intelligence vendor lock-in by
                 letting organisations evolve the combination of models they use over time, while grounding intelligence in how each community
                 defines and lives its workflows.
+              </motion.p>
+
+              <motion.p
+                initial={{ opacity: 0, y: 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.18 }}
+                className="mt-4 max-w-3xl text-pretty text-base leading-relaxed text-zinc-300"
+              >
+                The knowledge layer also becomes the meeting square for your people and their AI agents to commune, work together, and
+                achieve much more as an enterprise.
               </motion.p>
 
               <motion.div
@@ -115,7 +125,7 @@ export default function App() {
               <div className="text-sm font-medium text-zinc-200">From Penang to cognitive infrastructure</div>
               <div className="mt-3 space-y-3 text-sm leading-relaxed text-zinc-400">
                 <p>
-                  Born in Penang, Malaysia and educated in the Malaysian public school system, Chew was awarded a Singapore Ministry of
+                  Born in Penang, Malaysia and educated in the Malaysian public school system, Philip was awarded a Singapore Ministry of
                   Education ASEAN Scholarship and completed his A-levels at National Junior College.
                 </p>
                 <p>
@@ -123,13 +133,13 @@ export default function App() {
                   early recognition that took him from Malaysia and Singapore to the frontiers of American physics and computation.
                 </p>
                 <p>
-                  Based in Singapore today, Chew builds architectures that convert high-dimensional uncertainty into governed, auditable
+                  Based in Singapore today, Philip builds architectures that convert high-dimensional uncertainty into governed, auditable
                   workflows—so organisations can reason and act with continuity over time.
                 </p>
                 <div className="pt-2">
                   <div className="text-sm font-medium text-zinc-200">High-energy physics to institutional scale</div>
                   <div className="mt-3">
-                    Chew’s technical formation began in high-energy physics computing, building event reconstruction pipelines and probabilistic
+                    Philip’s technical formation began in high-energy physics computing, building event reconstruction pipelines and probabilistic
                     inference under tight latency and memory constraints. Later, as a founding architect of Aladdin, he helped scale
                     deterministic valuation and risk graphs where auditability and reproducibility are prerequisites for trust. Today at Keppel
                     Ltd, a global asset manager and operator based in Singapore, he leads the development of KAI (Keppel AI)—a governed platform
@@ -174,7 +184,7 @@ export default function App() {
                   </div>
                   <div>
                     <div className="text-zinc-200">Keppel Ltd</div>
-                    <div className="mt-1">A global asset manager and operator based in Singapore; leading AI & digital transformation and building KAI</div>
+                    <div className="mt-1">A global asset manager and operator based in Singapore with $95b AUM, and a Temasek portfolio company; leading AI & digital transformation; building KAI for Keppel and beyond</div>
                   </div>
                 </div>
               </div>
@@ -223,7 +233,7 @@ export default function App() {
               <div className="mt-3 space-y-3 text-sm leading-relaxed text-zinc-400">
                 <p>
                   At Keppel Ltd, a global asset manager and operator based in Singapore, rather than advocate a sweeping platform overhaul,
-                  Chew proposed tightly scoped pilots designed to operate within existing control frameworks—each with explicit success
+                  Philip proposed tightly scoped pilots designed to operate within existing control frameworks—each with explicit success
                   criteria, governance guardrails, and stop conditions.
                 </p>
                 <p>
@@ -232,14 +242,14 @@ export default function App() {
                   hypothetical capability to observed operational impact.
                 </p>
                 <p>
-                  In 2025, Keppel undertook the build of the KAI OS platform under Chew’s leadership. The platform, along with a first
+                  In 2025, Keppel undertook the build of the KAI OS platform under Philip’s leadership. The platform, along with a first
                   generation of AI agents and applications, was rolled into production by the end of 2025. Keppel expects all 4,000 employees
                   to be live on KAI by 3Q 2026, with more agents than employees by the end of 2026.
                 </p>
                 <p>
-                  Chew and his colleagues at Keppel believe they are on the right trajectory to solve a contemporaneous pain point for
+                  Philip and his colleagues at Keppel believe they are on the right trajectory to solve a contemporaneous pain point for
                   enterprises seeking a meaningful way to surf the cognitive AI wave: efficient, governed intelligence—rising and harnessed
-                  for people, culture, and strategy. As Chew helped BlackRock unleash Aladdin to the global asset management industry from the
+                  for people, culture, and strategy. As Philip helped BlackRock unleash Aladdin to the global asset management industry from the
                   1990s into the 2000s, Keppel is aiming to do the same with KAI—this time with broader applicability across knowledge-economy
                   enterprises.
                 </p>
@@ -408,7 +418,7 @@ export default function App() {
             <div className="text-sm font-medium text-zinc-200">Coda</div>
             <div className="mt-3 text-sm leading-relaxed text-zinc-400">
               Deterministic platforms delivered control but left interpretation as a bottleneck. Probabilistic systems expand adaptive
-              capacity but demand new forms of observability and governance. The knowledge layer is one more stratum—one more brick.
+              capacity but demand new forms of observability and governance. The knowledge layer is one more stratum—one more brick in our pursuit of enterprises that move at the speed of thought.
             </div>
           </div>
         </section>
