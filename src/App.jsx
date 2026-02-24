@@ -6,10 +6,10 @@ export default function App() {
     <div className="min-h-screen bg-gradient-to-b from-zinc-950 via-zinc-950 to-zinc-900 text-zinc-50">
       <header className="mx-auto flex w-full max-w-6xl flex-col items-start justify-between gap-3 px-6 py-6 md:flex-row md:items-center">
         <div className="text-xl font-semibold tracking-tight text-zinc-300 md:text-3xl">
-          Philip Chew.{"\u00A0\u00A0\u00A0\u00A0"}KAI OS platform.
+          BlackRock.{"\u00A0\u00A0"}Keppel heritage.{"\u00A0\u00A0\u00A0"}the KAI OS Platform
         </div>
         <nav className="flex flex-wrap items-center justify-start gap-x-6 gap-y-2 text-sm text-zinc-300 md:flex-nowrap md:justify-end">
-          <a className="hover:text-white" href="#biography">Biography</a>
+          <a className="hover:text-white" href="#biography">Phil's Biography</a>
           <a className="hover:text-white" href="#paradigms">Paradigms</a>
           <a className="hover:text-white" href="#kai">KAI</a>
           <a className="hover:text-white" href="#credentials">Credentials</a>
@@ -44,7 +44,7 @@ export default function App() {
                 className="mt-6 max-w-2xl text-pretty text-base leading-relaxed text-zinc-300 md:text-lg"
               >
                 From high-energy physics computing to deterministic institutional platforms and now governed, agent-based enterprise
-                intelligence, Philip designs architectures that transform complex, noisy data into auditable and scalable decision processes.
+                intelligence, Phil designs architectures that transform complex, noisy data into auditable and scalable decision processes.
               </motion.p>
 
               <motion.p
@@ -123,7 +123,7 @@ export default function App() {
               <div className="text-sm font-medium text-zinc-200">From Penang to cognitive infrastructure</div>
               <div className="mt-3 space-y-3 text-sm leading-relaxed text-zinc-400">
                 <p>
-                  Born in Penang, Malaysia and educated in the Malaysian public school system, Philip was awarded a Singapore Ministry of
+                  Born in Penang, Malaysia and educated in the Malaysian public school system, Phil was awarded a Singapore Ministry of
                   Education ASEAN Scholarship and completed his A-levels at National Junior College.
                 </p>
                 <p>
@@ -131,13 +131,13 @@ export default function App() {
                   early recognition that took him from Malaysia and Singapore to the frontiers of American physics and computation.
                 </p>
                 <p>
-                  Based in Singapore today, Philip builds architectures that convert high-dimensional uncertainty into governed, auditable
+                  Based in Singapore today, Phil builds architectures that convert high-dimensional uncertainty into governed, auditable
                   workflows - so organisations can reason and act with continuity over time.
                 </p>
                 <div className="pt-2">
                   <div className="text-sm font-medium text-zinc-200">High-energy physics to institutional scale</div>
                   <div className="mt-3">
-                    Philip’s technical formation began in high-energy physics computing, building event reconstruction pipelines and probabilistic
+                    Phil’s technical formation began in high-energy physics computing, building event reconstruction pipelines and probabilistic
                     inference under tight latency and memory constraints at Los Alamos National Laboratory, CERN and Fermilab. Later, as a founding architect of Aladdin at BlackRock, he helped scale
                     deterministic valuation and risk graphs where auditability and reproducibility are prerequisites for trust. Today at Keppel
                     Ltd, a global asset manager and operator based in Singapore, he leads the development of KAI (Keppel AI) - a governed platform
@@ -232,7 +232,7 @@ export default function App() {
               <div className="mt-3 space-y-3 text-sm leading-relaxed text-zinc-400">
                 <p>
                   At Keppel Ltd, a global asset manager and operator based in Singapore, rather than advocate a sweeping platform overhaul,
-                  Philip proposed tightly scoped pilots designed to operate within existing control frameworks - each with explicit success
+                  Phil proposed tightly scoped pilots designed to operate within existing control frameworks - each with explicit success
                   criteria, governance guardrails, and stop conditions.
                 </p>
                 <p>
@@ -241,14 +241,14 @@ export default function App() {
                   hypothetical capability to observed operational impact.
                 </p>
                 <p>
-                  In 2025, Keppel undertook the build of the KAI OS platform under Philip’s leadership. The platform, along with a first
+                  In 2025, Keppel undertook the build of the KAI OS platform under Phil’s leadership. The platform, along with a first
                   generation of AI agents and applications, was rolled into production by the end of 2025. Keppel expects all 4,000 employees
                   to be live on KAI by 3Q 2026, with more agents than employees by the end of 2026.
                 </p>
                 <p>
-                  Philip and his colleagues at Keppel believe they are on the right trajectory to solve a contemporaneous pain point for
+                  Phil and his colleagues at Keppel believe they are on the right trajectory to solve a contemporaneous pain point for
                   enterprises seeking a meaningful way to surf the cognitive AI wave: efficient, governed intelligence - rising and harnessed
-                  for people, culture, and strategy. As Philip helped BlackRock unleash Aladdin to the global asset management industry from the
+                  for people, culture, and strategy. As Phil helped BlackRock unleash Aladdin to the global asset management industry from the
                   1990s into the 2000s, Keppel is aiming to do the same with KAI - this time with broader applicability across knowledge-economy
                   enterprises.
                 </p>
