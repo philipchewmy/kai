@@ -297,7 +297,7 @@ export default function App() {
                   <iframe
                     src="/kai_workspace_architecture.html"
                     title="Human-led governed agent mesh architecture"
-                    className="w-full rounded-lg border-0 bg-zinc-950 pointer-events-none h-[520px] md:h-[640px]"
+                    className="w-full rounded-lg border-0 bg-zinc-950 pointer-events-none h-[680px] md:h-[832px]"
                     loading="lazy"
                   />
                   <a
