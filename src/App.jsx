@@ -291,13 +291,13 @@ export default function App() {
             <div className="border-b border-zinc-800 px-6 py-4">
               <div className="text-sm font-medium text-zinc-200">Governed agent mesh examples</div>
             </div>
-            <div className="grid gap-4 p-4 md:grid-cols-2 md:p-6">
+            <div className="grid gap-4 p-4 md:p-6">
               <div className="rounded-xl border border-zinc-800 bg-zinc-950/20 p-3">
                 <div className="relative">
                   <iframe
                     src="/kai_workspace_architecture.html"
                     title="Human-led governed agent mesh architecture"
-                    className="aspect-video w-full rounded-lg border-0 bg-zinc-950 pointer-events-none"
+                    className="w-full rounded-lg border-0 bg-zinc-950 pointer-events-none h-[520px] md:h-[640px]"
                     loading="lazy"
                   />
                   <a
