@@ -6,7 +6,7 @@
 <title>MVDA — Multi-Vector Decisioning Architecture</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300;1,9..40,400&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -42,7 +42,7 @@
     --gray-bg:     rgba(255,255,255,0.05);
     --gray-bd:     rgba(255,255,255,0.10);
 
-    --serif: 'DM Serif Display', Georgia, serif;
+    --serif: 'DM Sans', system-ui, sans-serif;
     --mono:  'DM Mono', 'Courier New', monospace;
   }
 
@@ -67,8 +67,8 @@
     animation: fadeUp 0.7s ease forwards;
   }
   .eyebrow { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 14px; }
-  h1 { font-family: var(--serif); font-size: clamp(28px, 4.5vw, 52px); font-weight: 400; line-height: 1.1; color: #e8e6de; letter-spacing: -0.01em; }
-  h1 em { font-style: italic; color: var(--gold-lt); }
+  h1 { font-family: var(--serif); font-size: clamp(28px, 4.5vw, 52px); font-weight: 600; line-height: 1.05; color: #e8e6de; letter-spacing: -0.03em; }
+  h1 em { font-style: italic; font-weight: 300; color: var(--gold-lt); }
   .sub { font-size: 13px; color: var(--muted); margin-top: 14px; letter-spacing: 0.02em; max-width: 540px; line-height: 1.65; }
 
   .outer {
@@ -91,10 +91,10 @@
     text-align: center; opacity: 0; transform: translateY(16px);
   }
   .node:hover { transform: translateY(-2px) !important; }
-  .nt { font-family: var(--serif); font-size: 18px; font-weight: 400; line-height: 1.2; }
+  .nt { font-family: var(--serif); font-size: 16px; font-weight: 500; line-height: 1.25; letter-spacing: -0.01em; }
   .ns { font-size: 11px; font-weight: 300; margin-top: 5px; letter-spacing: 0.04em; opacity: 0.75; }
 
-  .orch {
+  .orch { 
     width: min(480px, 100%);
     background: var(--gold-bg); border: 0.5px solid var(--gold-bd);
     box-shadow: 0 0 36px var(--gold-glow);
@@ -129,7 +129,7 @@
   }
   .agent { border-radius: 8px; padding: 18px 10px; cursor: pointer; text-align: center; transition: transform 0.2s ease, box-shadow 0.2s ease; }
   .agent:hover { transform: translateY(-3px); }
-  .an { font-family: var(--serif); font-size: 16px; font-weight: 400; line-height: 1.2; }
+  .an { font-family: var(--serif); font-size: 14px; font-weight: 500; line-height: 1.25; letter-spacing: -0.01em; }
   .as { font-size: 10px; font-weight: 300; margin-top: 6px; letter-spacing: 0.03em; opacity: 0.75; }
 
   .opt { background: var(--teal-bg);   border: 0.5px solid var(--teal-bd); }
@@ -152,7 +152,7 @@
     transition: background 0.2s, border-color 0.2s, transform 0.2s;
   }
   .out:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.2); transform: translateY(-2px); }
-  .out .nt { font-family: var(--serif); font-size: 16px; color: #c8c6be; }
+  .out .nt { font-family: var(--serif); font-size: 14px; font-weight: 500; color: #c8c6be; letter-spacing: -0.01em; }
 
   .csvg { width: 100%; overflow: visible; display: block; opacity: 0; max-width: 800px; }
   .lbl  { font-size: 11px; color: var(--muted); letter-spacing: 0.1em; text-align: center; opacity: 0; }
