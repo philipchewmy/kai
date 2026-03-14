@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MVDA — Multi-Vector Decisioning Architecture</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:          #0e0f0d;
+    --bg3:         #1a1b18;
+    --line:        rgba(255,255,255,0.055);
+    --line2:       rgba(255,255,255,0.12);
+    --text:        #d4d2c8;
+    --muted:       #6b6a62;
+    --dim:         #3a3930;
+
+    --teal-bg:     rgba(29,158,117,0.12);
+    --teal-bd:     rgba(29,158,117,0.30);
+    --teal-glow:   rgba(29,158,117,0.25);
+    --coral-bg:    rgba(216,90,48,0.12);
+    --coral-bd:    rgba(216,90,48,0.30);
+    --coral-glow:  rgba(216,90,48,0.25);
+    --amber-bg:    rgba(186,117,23,0.12);
+    --amber-bd:    rgba(186,117,23,0.30);
+    --amber-glow:  rgba(186,117,23,0.25);
+    --purple-bg:   rgba(127,119,221,0.12);
+    --purple-bd:   rgba(127,119,221,0.30);
+    --purple-glow: rgba(127,119,221,0.25);
+    --blue-bg:     rgba(55,138,221,0.12);
+    --blue-bd:     rgba(55,138,221,0.35);
+    --blue-glow:   rgba(55,138,221,0.30);
+    --gold-bg:     rgba(196,154,60,0.11);
+    --gold-bd:     rgba(196,154,60,0.40);
+    --gold-glow:   rgba(196,154,60,0.28);
+    --gold-lt:     #e8c97a;
+    --gold:        #C49A3C;
+    --gray-bg:     rgba(255,255,255,0.05);
+    --gray-bd:     rgba(255,255,255,0.10);
+
+    --serif: 'DM Serif Display', Georgia, serif;
+    --mono:  'DM Mono', 'Courier New', monospace;
+  }
+
+  html { background: var(--bg); color: var(--text); font-family: var(--mono); }
+
+  body {
+    min-height: 100vh;
+    background:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px),
+      var(--bg);
+    background-size: 48px 48px, 48px 48px, auto;
+    padding-bottom: 100px;
+    overflow-x: hidden;
+  }
+
+  header {
+    padding: 52px 48px 0;
+    max-width: 1180px;
+    margin: 0 auto;
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards;
+  }
+  .eyebrow { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 14px; }
+  h1 { font-family: var(--serif); font-size: clamp(28px, 4.5vw, 52px); font-weight: 400; line-height: 1.1; color: #e8e6de; letter-spacing: -0.01em; }
+  h1 em { font-style: italic; color: var(--gold-lt); }
+  .sub { font-size: 13px; color: var(--muted); margin-top: 14px; letter-spacing: 0.02em; max-width: 540px; line-height: 1.65; }
+
+  .outer {
+    max-width: 1180px;
+    margin: 56px auto 0;
+    padding: 0 48px;
+    display: grid;
+    grid-template-columns: 1fr 220px;
+    gap: 0;
+    align-items: start;
+  }
+
+  .diag { display: flex; flex-direction: column; align-items: center; gap: 0; position: relative; }
+
+  .step { font-size: 10px; color: var(--dim); letter-spacing: 0.1em; position: absolute; left: 0; }
+
+  .node {
+    border-radius: 10px; padding: 18px 28px; cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    text-align: center; opacity: 0; transform: translateY(16px);
+  }
+  .node:hover { transform: translateY(-2px) !important; }
+  .nt { font-family: var(--serif); font-size: 18px; font-weight: 400; line-height: 1.2; }
+  .ns { font-size: 11px; font-weight: 300; margin-top: 5px; letter-spacing: 0.04em; opacity: 0.75; }
+
+  .orch {
+    width: min(480px, 100%);
+    background: var(--gold-bg); border: 0.5px solid var(--gold-bd);
+    box-shadow: 0 0 36px var(--gold-glow);
+  }
+  .orch .nt { color: var(--gold-lt); }
+  .orch .ns { color: var(--gold); }
+  .orch:hover { box-shadow: 0 0 56px var(--gold-glow) !important; }
+
+  .macro {
+    width: min(480px, 100%);
+    background: var(--blue-bg); border: 0.5px solid var(--blue-bd);
+    box-shadow: 0 0 22px var(--blue-glow);
+  }
+  .macro .nt { color: #7fbde8; }
+  .macro .ns { color: #5a9ecb; }
+  .macro:hover { box-shadow: 0 0 40px var(--blue-glow) !important; }
+
+  .deci {
+    width: min(480px, 100%);
+    background: var(--gray-bg); border: 0.5px solid var(--gray-bd);
+  }
+  .deci .nt { color: #c8c6be; }
+  .deci .ns { color: var(--muted); }
+  .deci:hover { box-shadow: 0 0 18px rgba(255,255,255,0.07) !important; }
+
+  .mwrap { width: 100%; opacity: 0; transform: translateY(16px); }
+  .mlabel { font-size: 11px; color: var(--muted); letter-spacing: 0.1em; text-align: center; margin-bottom: 14px; }
+  .matrix {
+    display: grid; grid-template-columns: repeat(4,1fr); gap: 10px;
+    border: 0.5px dashed rgba(255,255,255,0.1); border-radius: 12px;
+    padding: 14px; background: rgba(255,255,255,0.015);
+  }
+  .agent { border-radius: 8px; padding: 18px 10px; cursor: pointer; text-align: center; transition: transform 0.2s ease, box-shadow 0.2s ease; }
+  .agent:hover { transform: translateY(-3px); }
+  .an { font-family: var(--serif); font-size: 16px; font-weight: 400; line-height: 1.2; }
+  .as { font-size: 10px; font-weight: 300; margin-top: 6px; letter-spacing: 0.03em; opacity: 0.75; }
+
+  .opt { background: var(--teal-bg);   border: 0.5px solid var(--teal-bd); }
+  .opt .an { color: #3fc99a; } .opt .as { color: #1D9E75; }
+  .opt:hover { box-shadow: 0 0 28px var(--teal-glow); }
+  .pes { background: var(--coral-bg);  border: 0.5px solid var(--coral-bd); }
+  .pes .an { color: #e8845d; } .pes .as { color: #D85A30; }
+  .pes:hover { box-shadow: 0 0 28px var(--coral-glow); }
+  .rea { background: var(--amber-bg);  border: 0.5px solid var(--amber-bd); }
+  .rea .an { color: #d4a04a; } .rea .as { color: #BA7517; }
+  .rea:hover { box-shadow: 0 0 28px var(--amber-glow); }
+  .con { background: var(--purple-bg); border: 0.5px solid var(--purple-bd); }
+  .con .an { color: #a9a3e8; } .con .as { color: #7F77DD; }
+  .con:hover { box-shadow: 0 0 28px var(--purple-glow); }
+
+  .outputs { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; width: 100%; opacity: 0; transform: translateY(16px); }
+  .out {
+    background: var(--gray-bg); border: 0.5px solid var(--gray-bd);
+    border-radius: 8px; padding: 18px 14px; cursor: pointer; text-align: center;
+    transition: background 0.2s, border-color 0.2s, transform 0.2s;
+  }
+  .out:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.2); transform: translateY(-2px); }
+  .out .nt { font-family: var(--serif); font-size: 16px; color: #c8c6be; }
+
+  .csvg { width: 100%; overflow: visible; display: block; opacity: 0; max-width: 800px; }
+  .lbl  { font-size: 11px; color: var(--muted); letter-spacing: 0.1em; text-align: center; opacity: 0; }
+
+  .legend {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 24px;
+    justify-content: center; margin-top: 52px;
+    opacity: 0; animation: fadeIn 0.6s 1.7s ease forwards;
+  }
+  .li { display: flex; align-items: center; gap: 8px; font-size: 11px; color: var(--muted); letter-spacing: 0.06em; }
+  .ll { display: inline-block; width: 28px; height: 1px; background: var(--muted); opacity: 0.6; }
+  .ll.d { background: none; border-top: 1px dashed rgba(255,255,255,0.25); }
+  .ll.s { background: rgba(255,255,255,0.4); }
+  .ll.g { background: none; border-top: 1px dashed rgba(196,154,60,0.55); }
+
+  /* ── LOOP COLUMN ── */
+  .loop-col {
+    position: relative;
+    padding-left: 18px;
+    opacity: 0;
+    animation: fadeIn 0.8s 1.4s ease forwards;
+  }
+
+  #loop-svg { width: 100%; display: block; overflow: visible; }
+
+  .qtag {
+    position: absolute;
+    left: 30px;
+    font-size: 11px; font-weight: 300;
+    color: rgba(232,201,122,0.72);
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    padding: 5px 10px;
+    background: rgba(196,154,60,0.07);
+    border: 0.5px solid rgba(196,154,60,0.2);
+    border-radius: 6px;
+    white-space: nowrap;
+    line-height: 1.4;
+    transition: background 0.2s, color 0.2s;
+    max-width: 170px;
+  }
+  .qtag:hover { background: rgba(196,154,60,0.16); color: var(--gold-lt); }
+
+  .loop-footer {
+    margin-top: 12px;
+    padding-left: 4px;
+    font-size: 10px;
+    color: var(--dim);
+    letter-spacing: 0.12em;
+  }
+
+  /* ── TOOLTIP ── */
+  .tooltip {
+    position: fixed; background: var(--bg3); border: 0.5px solid var(--line2);
+    border-radius: 8px; padding: 12px 16px; font-size: 12px; color: var(--text);
+    max-width: 290px; line-height: 1.65; pointer-events: none;
+    opacity: 0; transition: opacity 0.15s ease; z-index: 100;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.55);
+  }
+  .tooltip.on { opacity: 1; }
+
+  @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+  @keyframes fadeIn { to { opacity: 1; } }
+
+  .a1  { animation: fadeUp 0.6s 0.20s ease forwards; }
+  .a2  { animation: fadeUp 0.6s 0.40s ease forwards; }
+  .a3  { animation: fadeUp 0.6s 0.56s ease forwards; }
+  .a4  { animation: fadeUp 0.6s 0.76s ease forwards; }
+  .a5  { animation: fadeUp 0.6s 0.92s ease forwards; }
+  .a6  { animation: fadeUp 0.6s 1.08s ease forwards; }
+  .c1  { animation: fadeIn 0.5s 0.32s ease forwards; }
+  .c2  { animation: fadeIn 0.5s 0.50s ease forwards; }
+  .c3a { animation: fadeIn 0.5s 0.66s ease forwards; }
+  .c3b { animation: fadeIn 0.5s 0.72s ease forwards; }
+  .c4  { animation: fadeIn 0.5s 0.82s ease forwards; }
+  .c5  { animation: fadeIn 0.5s 0.96s ease forwards; }
+
+  @keyframes pulse { 0%,100%{opacity:0.3} 50%{opacity:1} }
+  .pdot { animation: pulse 2.4s ease-in-out infinite; }
+
+  @media (max-width: 860px) {
+    .outer { grid-template-columns: 1fr; padding: 0 24px; }
+    .loop-col { display: none; }
+    header { padding: 36px 24px 0; }
+    .matrix { grid-template-columns: repeat(2,1fr); }
+    .outputs { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <p class="eyebrow">Multi-Vector Decisioning Architecture</p>
+  <h1>Cognitive Matrix<br><em>Adversarial Intelligence</em></h1>
+  <p class="sub">A four-tier decisioning pipeline. The Orchestrator drives the cycle — environmental context fans through adversarial agents, the engine synthesises — then the loop asks: <em style="color:rgba(232,201,122,0.7)">can we do better?</em></p>
+</header>
+
+<div class="outer">
+
+  <!-- DIAGRAM COLUMN -->
+  <div class="diag" id="diag">
+
+    <!-- 00 ORCHESTRATOR -->
+    <div style="position:relative;width:100%;display:flex;flex-direction:column;align-items:center">
+      <span class="step" style="top:18px">00</span>
+      <div class="node orch a1" onclick="si('orch')">
+        <div class="nt">Orchestrator Agent</div>
+        <div class="ns">Drives the cycle · initiates · contemplates</div>
+      </div>
+      <svg class="csvg c1" height="46" viewBox="0 0 600 46">
+        <defs>
+          <marker id="m0" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+            <path d="M2 1L8 5L2 9" fill="none" stroke="rgba(196,154,60,0.65)" stroke-width="1.5" stroke-linecap="round"/>
+          </marker>
+        </defs>
+        <line x1="300" y1="2" x2="300" y2="42" stroke="rgba(196,154,60,0.50)" stroke-width="1" marker-end="url(#m0)"/>
+        <circle cx="300" cy="2" r="3" fill="rgba(196,154,60,0.7)" class="pdot"/>
+      </svg>
+    </div>
+
+    <!-- 01 MACRO CONTEXT AGENT -->
+    <div style="position:relative;width:100%;display:flex;flex-direction:column;align-items:center">
+      <span class="step" style="top:18px">01</span>
+      <div class="node macro a2" onclick="si('macro')">
+        <div class="nt">Macro Context Agent</div>
+        <div class="ns">Top-down environmental vector</div>
+      </div>
+      <svg class="csvg c2" height="52" viewBox="0 0 600 52">
+        <defs>
+          <marker id="m1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+            <path d="M2 1L8 5L2 9" fill="none" stroke="rgba(55,138,221,0.55)" stroke-width="1.5" stroke-linecap="round"/>
+          </marker>
+        </defs>
+        <line x1="300" y1="0" x2="108" y2="48" stroke="rgba(55,138,221,0.28)" stroke-width="0.75" marker-end="url(#m1)"/>
+        <line x1="300" y1="0" x2="236" y2="48" stroke="rgba(55,138,221,0.38)" stroke-width="0.75" marker-end="url(#m1)"/>
+        <line x1="300" y1="0" x2="300" y2="48" stroke="rgba(55,138,221,0.55)" stroke-width="1"    marker-end="url(#m1)"/>
+        <line x1="300" y1="0" x2="364" y2="48" stroke="rgba(55,138,221,0.38)" stroke-width="0.75" marker-end="url(#m1)"/>
+        <line x1="300" y1="0" x2="492" y2="48" stroke="rgba(55,138,221,0.28)" stroke-width="0.75" marker-end="url(#m1)"/>
+        <circle cx="300" cy="0" r="3" fill="rgba(55,138,221,0.65)" class="pdot"/>
+      </svg>
+    </div>
+
+    <!-- 02 COGNITIVE MATRIX -->
+    <div style="position:relative;width:100%">
+      <span class="step" style="top:28px">02</span>
+      <div class="mwrap a3">
+        <p class="mlabel">Cognitive Matrix — adversarial parallel vectors</p>
+        <div class="matrix">
+          <div class="agent opt" onclick="si('opt')">
+            <div class="an">Optimist</div>
+            <div class="as">Bull case · max upside</div>
+          </div>
+          <div class="agent pes" onclick="si('pes')">
+            <div class="an">Pessimist</div>
+            <div class="as">Bear case · tail risks</div>
+          </div>
+          <div class="agent rea" onclick="si('rea')">
+            <div class="an">Realist</div>
+            <div class="as">Base case · run-rates</div>
+          </div>
+          <div class="agent con" onclick="si('con')">
+            <div class="an">Contrarian</div>
+            <div class="as">Outliers · mean reversion</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- synthesis label + convergence -->
+    <p class="lbl c3a" style="margin-top:18px">adversarial synthesis</p>
+    <svg class="csvg c3b" height="44" viewBox="0 0 600 44">
+      <defs>
+        <marker id="m2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+          <path d="M2 1L8 5L2 9" fill="none" stroke="rgba(255,255,255,0.33)" stroke-width="1.5" stroke-linecap="round"/>
+        </marker>
+      </defs>
+      <line x1="108" y1="0" x2="265" y2="40" stroke="rgba(255,255,255,0.17)" stroke-width="0.75" stroke-dasharray="4 3" marker-end="url(#m2)"/>
+      <line x1="236" y1="0" x2="282" y2="40" stroke="rgba(255,255,255,0.22)" stroke-width="0.75" stroke-dasharray="4 3" marker-end="url(#m2)"/>
+      <line x1="300" y1="0" x2="300" y2="40" stroke="rgba(255,255,255,0.33)" stroke-width="1"    stroke-dasharray="4 3" marker-end="url(#m2)"/>
+      <line x1="364" y1="0" x2="318" y2="40" stroke="rgba(255,255,255,0.22)" stroke-width="0.75" stroke-dasharray="4 3" marker-end="url(#m2)"/>
+      <line x1="492" y1="0" x2="335" y2="40" stroke="rgba(255,255,255,0.17)" stroke-width="0.75" stroke-dasharray="4 3" marker-end="url(#m2)"/>
+    </svg>
+
+    <!-- 03 DECISIONING ENGINE -->
+    <div style="position:relative;width:100%;display:flex;flex-direction:column;align-items:center">
+      <span class="step" style="top:14px">03</span>
+      <div class="node deci a4" onclick="si('deci')">
+        <div class="nt">Decisioning Engine</div>
+        <div class="ns">Adjudicates · weights · resolves</div>
+      </div>
+      <svg class="csvg c4" height="48" viewBox="0 0 600 48">
+        <defs>
+          <marker id="m3" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+            <path d="M2 1L8 5L2 9" fill="none" stroke="rgba(255,255,255,0.40)" stroke-width="1.5" stroke-linecap="round"/>
+          </marker>
+        </defs>
+        <line x1="300" y1="0" x2="112" y2="45" stroke="rgba(255,255,255,0.22)" stroke-width="0.75" marker-end="url(#m3)"/>
+        <line x1="300" y1="0" x2="300" y2="45" stroke="rgba(255,255,255,0.40)" stroke-width="1"    marker-end="url(#m3)"/>
+        <line x1="300" y1="0" x2="488" y2="45" stroke="rgba(255,255,255,0.22)" stroke-width="0.75" marker-end="url(#m3)"/>
+      </svg>
+    </div>
+
+    <!-- OUTPUTS -->
+    <div class="outputs a5" id="outputs">
+      <div class="out" onclick="si('dir')"><div class="nt">Strategic directive</div></div>
+      <div class="out" onclick="si('exe')"><div class="nt">Execution plan</div></div>
+      <div class="out" onclick="si('aud')"><div class="nt">Audit trail</div></div>
+    </div>
+
+    <!-- LEGEND -->
+    <div class="legend">
+      <div class="li"><span class="ll"></span><span>constraint flow</span></div>
+      <div class="li"><span class="ll d"></span><span>adversarial debate</span></div>
+      <div class="li"><span class="ll s"></span><span>synthesis output</span></div>
+      <div class="li"><span class="ll g"></span><span>contemplation loop</span></div>
+    </div>
+
+  </div><!-- /diag -->
+
+
+  <!-- CONTEMPLATION LOOP COLUMN -->
+  <div class="loop-col" id="loopcol">
+
+    <svg id="loop-svg" viewBox="0 0 200 800" preserveAspectRatio="xMinYMin meet">
+      <defs>
+        <marker id="la" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+          <path d="M2 1L8 5L2 9" fill="none" stroke="rgba(196,154,60,0.9)" stroke-width="1.5" stroke-linecap="round"/>
+        </marker>
+        <path id="lp" d="M 22 760 C 130 760, 168 620, 168 500 C 168 350, 168 200, 168 90 C 168 48, 118 22, 22 22" fill="none"/>
+      </defs>
+
+      <!-- dashed arc -->
+      <use href="#lp" fill="none" stroke="rgba(196,154,60,0.20)" stroke-width="1.5" stroke-dasharray="5 4"/>
+
+      <!-- arrowhead back to orchestrator -->
+      <path d="M 58 20 L 24 20" stroke="rgba(196,154,60,0.80)" stroke-width="1" fill="none" marker-end="url(#la)"/>
+
+      <!-- waypoint dots -->
+      <circle cx="168" cy="230" r="3" fill="rgba(196,154,60,0.38)"/>
+      <circle cx="168" cy="480" r="3" fill="rgba(196,154,60,0.38)"/>
+      <circle cx="168" cy="660" r="3" fill="rgba(196,154,60,0.38)"/>
+
+      <!-- travelling dot -->
+      <circle r="4" fill="rgba(232,201,122,0.95)">
+        <animateMotion dur="6s" begin="2s" repeatCount="indefinite" rotate="none">
+          <mpath href="#lp"/>
+        </animateMotion>
+        <animate attributeName="opacity"
+          values="0;0;1;1;1;1;0"
+          keyTimes="0;0.02;0.07;0.45;0.82;0.96;1"
+          dur="6s" begin="2s" repeatCount="indefinite"/>
+        <animate attributeName="r"
+          values="2;4;4;4;4;2"
+          keyTimes="0;0.07;0.3;0.65;0.93;1"
+          dur="6s" begin="2s" repeatCount="indefinite"/>
+      </circle>
+    </svg>
+
+    <!-- Q tags — JS positions vertically -->
+    <div class="qtag" id="q1" onclick="si('q1')">can we do better?</div>
+    <div class="qtag" id="q2" onclick="si('q2')">double down?<br>look elsewhere?</div>
+    <div class="qtag" id="q3" onclick="si('q3')">do more?<br>do less?</div>
+
+    <p class="loop-footer">contemplation loop</p>
+  </div>
+
+</div><!-- /outer -->
+
+<div class="tooltip" id="tip"></div>
+
+<script>
+function syncLoop() {
+  const diag = document.getElementById('diag');
+  const svg  = document.getElementById('loop-svg');
+  if (!diag || !svg) return;
+  const H = Math.round(diag.getBoundingClientRect().height);
+  if (H < 300) return;
+
+  svg.setAttribute('viewBox', `0 0 200 ${H}`);
+  svg.style.height = H + 'px';
+
+  const bot = H - 40;
+  const p = `M 22 ${bot} C 130 ${bot}, 168 ${Math.round(H*0.77)}, 168 ${Math.round(H*0.56)} C 168 ${Math.round(H*0.36)}, 168 ${Math.round(H*0.18)}, 168 90 C 168 48, 118 22, 22 22`;
+  document.getElementById('lp').setAttribute('d', p);
+
+  const dots = Array.from(svg.querySelectorAll('circle')).filter(c => parseFloat(c.getAttribute('r')) < 4);
+  const dotFracs = [0.22, 0.52, 0.72];
+  dots.forEach((d, i) => d.setAttribute('cy', Math.round(H * dotFracs[i])));
+
+  const tagFracs = [0.17, 0.46, 0.68];
+  ['q1','q2','q3'].forEach((id, i) => {
+    const el = document.getElementById(id);
+    if (el) el.style.top = Math.round(H * tagFracs[i]) + 'px';
+  });
+}
+
+window.addEventListener('load',   () => setTimeout(syncLoop, 200));
+window.addEventListener('resize', syncLoop);
+
+const DATA = {
+  orch: { t:'Orchestrator Agent',      b:'The apex controller of the pipeline. Initiates every decisioning cycle, tasks the Macro Context Agent, and receives synthesised outputs — then enters a contemplation loop to judge quality and determine the next move.' },
+  macro:{ t:'Macro Context Agent',     b:'Ingests top-down environmental signals — market regime, macro backdrop, geopolitical vectors — and broadcasts a conditioning context to all downstream agents.' },
+  opt:  { t:'Optimist',                b:'Constructs the bull case. Maximises upside scenarios, identifies convexity, and surfaces opportunities that pessimistic framing would suppress.' },
+  pes:  { t:'Pessimist',               b:'Constructs the bear case. Stress-tests tail risks, models adverse scenarios, and challenges assumptions that the optimist treats as given.' },
+  rea:  { t:'Realist',                 b:'Anchors the base case. Extrapolates run-rates, applies mean-reversion logic, and calibrates expected value against historical distributions.' },
+  con:  { t:'Contrarian',              b:'Challenges consensus. Surfaces outliers, reversals, and structural regime breaks that the base-case framing would systematically miss.' },
+  deci: { t:'Decisioning Engine',      b:'Adjudicates the adversarial vectors. Assigns confidence weights, resolves contradictions, and distils the cognitive matrix into an actionable synthesis.' },
+  dir:  { t:'Strategic Directive',     b:'The high-conviction output: a clear, ranked directional call with supporting rationale from the synthesised agent debate.' },
+  exe:  { t:'Execution Plan',          b:'Tactical implementation steps, sizing guidance, entry/exit conditions, and risk parameters derived from the strategic directive.' },
+  aud:  { t:'Audit Trail',             b:'Full provenance log of agent positions, weight assignments, and decisioning rationale — enabling post-hoc review and model calibration.' },
+  q1:   { t:'Can we do better?',       b:'The Orchestrator evaluates output quality against internal success criteria — confidence, coherence, coverage. If gaps exist, it triggers a new cycle with refined parameters and elevated scrutiny across the entire team.' },
+  q2:   { t:'Double down? Look elsewhere?', b:'The Orchestrator decides whether to concentrate further resources on the current thesis — or redirect the team toward an adjacent opportunity, risk dimension, or scenario that the current cycle underweighted.' },
+  q3:   { t:'Do more? Do less?',       b:'The Orchestrator calibrates effort: are additional cycles adding marginal insight, or is the synthesis already sufficient for action? Knowing when to stop is as critical as knowing when to iterate.' },
+};
+
+const tip = document.getElementById('tip');
+let timer;
+function si(k) {
+  const d = DATA[k]; if (!d) return;
+  tip.innerHTML = `<strong style="font-weight:500;color:#e8e6de;display:block;margin-bottom:6px">${d.t}</strong>${d.b}`;
+  tip.classList.add('on');
+  clearTimeout(timer);
+  timer = setTimeout(() => tip.classList.remove('on'), 5500);
+}
+
+document.addEventListener('mousemove', e => {
+  const x = e.clientX + 16, y = e.clientY + 16;
+  tip.style.left = (x + tip.offsetWidth  > window.innerWidth  - 16 ? x - tip.offsetWidth  - 32 : x) + 'px';
+  tip.style.top  = (y + tip.offsetHeight > window.innerHeight - 16 ? y - tip.offsetHeight - 32 : y) + 'px';
+});
+
+document.addEventListener('click', e => {
+  if (!e.target.closest('.node,.agent,.out,.qtag')) tip.classList.remove('on');
+});
+</script>
+</body>
+</html>

@@ -308,11 +308,11 @@ export default function App() {
               </div>
 
               <div className="rounded-xl border border-zinc-800 bg-zinc-950/20 p-3">
-                <a href="/kai-agent-mesh-MVDA.jpg" target="_blank" rel="noreferrer">
-                  <img
-                    src="/kai-agent-mesh-MVDA.jpg"
-                    alt="Multi-vector decision analyzer for comprehensive, governed, and auditable decisions"
-                    className="h-auto w-full rounded-lg"
+                <a href="/mvda_architecture.html" target="_blank" rel="noreferrer">
+                  <iframe
+                    src="/mvda_architecture.html"
+                    title="Multi-vector decision analyzer (MVDA) architecture"
+                    className="aspect-video w-full rounded-lg border-0 bg-zinc-950"
                     loading="lazy"
                   />
                 </a>
