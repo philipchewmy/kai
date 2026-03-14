@@ -311,13 +311,13 @@ export default function App() {
                 <a href="/kai-agent-mesh-MVDA.jpg" target="_blank" rel="noreferrer">
                   <img
                     src="/kai-agent-mesh-MVDA.jpg"
-                    alt="Multi-vector decisioning analyzer (MVDA) for comprehensive, governed and auditable decisioning"
+                    alt="Multi-vector decision analyzer for comprehensive, governed, and auditable decisions"
                     className="h-auto w-full rounded-lg"
                     loading="lazy"
                   />
                 </a>
                 <div className="mt-3 text-xs leading-relaxed text-zinc-400">
-                  Multi-vector decisioning analyzer MVDA for comprehensive, governed and auditable decisioning
+                  Multi-vector decision analyzer for comprehensive, governed, and auditable decisions
                 </div>
                 <div className="mt-1 text-xs text-zinc-500">Click to open full size.</div>
               </div>
