@@ -293,14 +293,21 @@ export default function App() {
             </div>
             <div className="grid gap-4 p-4 md:grid-cols-2 md:p-6">
               <div className="rounded-xl border border-zinc-800 bg-zinc-950/20 p-3">
-                <a href="/kai-agent-mesh-human-orchestrated.png" target="_blank" rel="noreferrer">
-                  <img
-                    src="/kai-agent-mesh-human-orchestrated.png"
-                    alt="Tightly-coupled, human-in-charge and human-orchestrated governed AI agent mesh"
-                    className="h-auto w-full rounded-lg"
+                <div className="relative">
+                  <iframe
+                    src="/kai_workspace_architecture.html"
+                    title="Human-led governed agent mesh architecture"
+                    className="aspect-video w-full rounded-lg border-0 bg-zinc-950 pointer-events-none"
                     loading="lazy"
                   />
-                </a>
+                  <a
+                    href="/kai_workspace_architecture.html"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="absolute inset-0 rounded-lg"
+                    aria-label="Open human-led architecture full size"
+                  />
+                </div>
                 <div className="mt-3 text-xs leading-relaxed text-zinc-400">
                   Tightly-coupled, human-in-charge-and-orchestrated.
                 </div>

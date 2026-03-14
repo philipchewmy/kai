@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KAI Workspace</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #0d0d0d;
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    padding: 20px 32px 72px;
+  }
+
+  .diagram {
+    width: 1060px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  /* ── TEAM LEADER ── */
+  .tl-row {
+    display: flex;
+    padding-left: 148px;
+    justify-content: center;
+    margin-bottom: 0;
+    position: relative;
+    z-index: 3;
+  }
+  .tl-box {
+    background: #fff8e0;
+    border-radius: 10px;
+    padding: 13px 40px;
+    font-size: 15px;
+    font-weight: 500;
+    color: #1c1408;
+  }
+
+  /* ── SVG ARCS ── */
+  .arc-svg {
+    display: block;
+    width: 100%;
+    height: 0;
+    overflow: visible;
+    position: absolute;
+    left: 0;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  /* ── WORKSPACE ROWS ── */
+  .workspace-row {
+    display: flex;
+    align-items: flex-start;
+    position: relative;
+    z-index: 2;
+    margin-top: 130px;
+  }
+  /* second row: augmented pods flush against top pods */
+  .workspace-row-2 {
+    display: flex;
+    align-items: flex-start;
+    position: relative;
+    z-index: 2;
+    margin-top: -2px;
+  }
+
+  /* ── ANNOTATIONS ── */
+  .annotations {
+    width: 148px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding-right: 16px;
+    padding-top: 52px;
+    gap: 0;
+  }
+
+  .ann-block { text-align: right; margin-bottom: 24px; }
+  .ann-line {
+    display: block;
+    font-size: 12px;
+    font-weight: 400;
+    color: #777;
+    line-height: 1.75;
+  }
+  .ann-line.faint { color: #555; }
+  .kai-label {
+    writing-mode: vertical-lr;
+    transform: rotate(180deg);
+    font-size: 34px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.09);
+    letter-spacing: 0.04em;
+    margin-top: 18px;
+    user-select: none;
+  }
+
+  /* ── PODS GRID ── */
+  .pods {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    align-items: start;
+  }
+  /* column wrapper stacks top pod + aug pod with no gap */
+  .pod-column {
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ── SINGLE POD ── */
+  .pod {
+    border: 2px solid #383838;
+    border-bottom: none;
+    border-radius: 22px 22px 0 0;
+    padding: 0 16px 18px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    margin-top: 24px;
+  }
+
+  /* ── KAI MODERATOR ── */
+  .mod {
+    background: #7c2060;
+    border-radius: 10px;
+    padding: 13px 8px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #fff;
+    text-align: center;
+    width: calc(33.333% - 7px);
+    align-self: center;
+    margin-top: -24px;
+    margin-bottom: 16px;
+    position: relative;
+    z-index: 3;
+  }
+
+  /* ── DECISION OBJECT ── */
+  .dec-obj {
+    background: #404040;
+    border-radius: 10px;
+    padding: 15px 8px;
+    font-size: 13px;
+    font-weight: 400;
+    color: #bbb;
+    text-align: center;
+    line-height: 1.45;
+    margin-bottom: 6px;
+    width: calc(33.333% - 7px);
+    align-self: center;
+  }
+  .dec-labels {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    margin-bottom: 0;
+  }
+  .dec-labels span { font-size: 12px; color: #777; font-weight: 400; }
+
+  .spacer-custom { height: 68px; }
+
+  /* ── CUSTOM AGENTS ── */
+  .custom-agents {
+    background: #b05070;
+    border-radius: 10px;
+    padding: 15px 8px;
+    font-size: 13px;
+    font-weight: 400;
+    color: #fce0ea;
+    text-align: center;
+    line-height: 1.45;
+    width: calc(33.333% - 7px);
+    align-self: center;
+    margin: 10px 0 10px;
+  }
+
+  /* ── AGENT ROW ── */
+  .agent-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+    margin-top: 16px;
+    margin-bottom: 10px;
+  }
+  .agent {
+    background: #7c2060;
+    border-radius: 10px;
+    padding: 15px 8px;
+    font-size: 13px;
+    font-weight: 400;
+    color: #fff;
+    text-align: center;
+    line-height: 1.45;
+  }
+
+  /* ── BOTTOM ROW ── */
+  .bottom-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+  }
+  .kai-apps {
+    background: #7c2060;
+    border-radius: 10px;
+    padding: 15px 8px;
+    font-size: 13px;
+    font-weight: 400;
+    color: #fff;
+    text-align: center;
+    line-height: 1.45;
+  }
+  .human {
+    background: #fff8e0;
+    border-radius: 10px;
+    padding: 15px 8px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #1c1408;
+    text-align: center;
+    line-height: 1.45;
+  }
+  .tbd {
+    background: transparent;
+    border: 2px solid #6644bb;
+    border-radius: 10px;
+    padding: 15px 8px;
+    font-size: 13px;
+    font-weight: 400;
+    color: #8866cc;
+    text-align: center;
+    line-height: 1.45;
+  }
+
+  /* ── AUGMENTED PODS ── */
+  .aug-pod {
+    border: 2px solid #383838;
+    border-top: none;
+    border-radius: 0 0 22px 22px;
+    padding: 18px 16px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+    margin-top: 0;
+  }
+  .aug {
+    border-radius: 12px;
+    padding: 17px 8px;
+    font-size: 13px;
+    font-weight: 400;
+    color: #fff;
+    text-align: center;
+  }
+  .aug.l { background: #d96800; }
+  .aug.r { background: #e87c10; }
+</style>
+</head>
+<body>
+<div class="diagram" id="diagram">
+
+  <!-- TEAM LEADER -->
+  <div class="tl-row">
+    <div class="tl-box" id="tl-box">Team Leader</div>
+  </div>
+
+  <!-- SVG ARCS -->
+  <svg class="arc-svg" id="arc-svg" xmlns="http://www.w3.org/2000/svg">
+    <path id="arc-left"  stroke="#555"    stroke-width="2" fill="none" stroke-linecap="round"/>
+    <path id="arc-right" stroke="#484848" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <text id="lbl-left-1"  font-family="DM Sans, sans-serif" font-size="12.5" fill="#777" text-anchor="middle"></text>
+    <text id="lbl-left-2"  font-family="DM Sans, sans-serif" font-size="12.5" fill="#777" text-anchor="middle"></text>
+    <text id="lbl-right-1" font-family="DM Sans, sans-serif" font-size="12.5" fill="#666" text-anchor="middle"></text>
+  </svg>
+
+  <!-- WORKSPACE: annotations + two column-stacks -->
+  <div class="workspace-row">
+    <div class="annotations">
+      <div class="ann-block">
+        <span class="ann-line">People only</span>
+        <span class="ann-line">AI agents only</span>
+        <span class="ann-line">People x AI agents</span>
+      </div>
+      <div class="ann-block">
+        <span class="ann-line faint">Audit-quality</span>
+        <span class="ann-line faint">Decision Ledger</span>
+        <span class="ann-line faint">+ Artifacts</span>
+      </div>
+      <div class="kai-label">Kai workspace</div>
+    </div>
+
+    <div class="pods">
+
+      <!-- LEFT COLUMN: top pod + aug pod -->
+      <div class="pod-column">
+        <div class="pod">
+          <div class="mod" id="mod-left">KAI moderator</div>
+          <div class="dec-obj">Decision<br>Object</div>
+          <div class="dec-labels">
+            <span>Framing</span><span>Objectives</span><span>Resources</span>
+          </div>
+          <div class="spacer-custom" id="spacer-custom"></div>
+          <div class="agent-row">
+            <div class="agent" id="agent-ref">Domain<br>Agents</div>
+            <div class="agent">Thinking<br>Agents</div>
+            <div class="agent">Policy<br>Agents</div>
+          </div>
+          <div class="bottom-row">
+            <div class="kai-apps">Your KAI Apps<br>as Agents</div>
+            <div class="human">Team mbr 1</div>
+            <div class="tbd">TBD</div>
+          </div>
+        </div>
+        <div class="aug-pod">
+          <div class="aug l">Augmented 1</div>
+          <div class="aug l">Augmented 2</div>
+          <div class="aug l">Augmented 3</div>
+          <div class="aug l">Augmented 4</div>
+          <div class="aug l">Augmented 5</div>
+          <div class="aug l">Augmented 6</div>
+        </div>
+      </div>
+
+      <!-- RIGHT COLUMN: top pod + aug pod -->
+      <div class="pod-column">
+        <div class="pod">
+          <div class="mod" id="mod-right">KAI moderator</div>
+          <div class="dec-obj">Decision<br>Object</div>
+          <div class="dec-labels">
+            <span>Framing</span><span>Objectives</span><span>Resources</span>
+          </div>
+          <div class="custom-agents" id="custom-agents-box">Custom<br>Agents</div>
+          <div class="agent-row">
+            <div class="agent">Domain<br>Agents</div>
+            <div class="agent">Thinking<br>Agents</div>
+            <div class="agent">Policy<br>Agents</div>
+          </div>
+          <div class="bottom-row">
+            <div class="kai-apps">Your KAI Apps<br>as Agents</div>
+            <div class="human">Team mbr 2</div>
+            <div class="tbd">TBD</div>
+          </div>
+        </div>
+        <div class="aug-pod">
+          <div class="aug r">Augmented 7</div>
+          <div class="aug r">Augmented 8</div>
+          <div class="aug r">Augmented 9</div>
+          <div class="aug r">Augmented 10</div>
+          <div class="aug r">Augmented 11</div>
+          <div class="aug r">Augmented 12</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<script>
+window.addEventListener('load', () => { syncLayout(); drawArcs(); });
+window.addEventListener('resize', () => { syncLayout(); drawArcs(); });
+
+function syncLayout() {
+  const customBox = document.getElementById('custom-agents-box');
+  const spacer    = document.getElementById('spacer-custom');
+  if (customBox && spacer) {
+    const style  = getComputedStyle(customBox);
+    const totalH = customBox.offsetHeight
+                 + parseFloat(style.marginTop)
+                 + parseFloat(style.marginBottom);
+    spacer.style.height = totalH + 'px';
+  }
+}
+
+function drawArcs() {
+  const diagram  = document.getElementById('diagram');
+  const svg      = document.getElementById('arc-svg');
+  const tlBox    = document.getElementById('tl-box');
+  const modLeft  = document.getElementById('mod-left');
+  const modRight = document.getElementById('mod-right');
+
+  // Use offsetTop/offsetLeft chain for coordinates relative to diagram,
+  // independent of scroll position
+  function offsetFrom(el, ancestor) {
+    let top = 0, left = 0;
+    while (el && el !== ancestor) {
+      top  += el.offsetTop;
+      left += el.offsetLeft;
+      el    = el.offsetParent;
+    }
+    return { top, left };
+  }
+
+  const dW = diagram.offsetWidth;
+
+  const tlOff = offsetFrom(tlBox, diagram);
+  const mlOff = offsetFrom(modLeft, diagram);
+  const mrOff = offsetFrom(modRight, diagram);
+
+  // start: bottom-center of TL box
+  const tlCx = tlOff.left + tlBox.offsetWidth / 2;
+  const tlCy = tlOff.top  + tlBox.offsetHeight;
+
+  // end: top-center of each moderator
+  const mlCx = mlOff.left + modLeft.offsetWidth / 2;
+  const mlCy = mlOff.top;
+  const mrCx = mrOff.left + modRight.offsetWidth / 2;
+  const mrCy = mrOff.top;
+
+  // Position SVG to cover from TL bottom to moderator tops
+  const svgY = tlCy;
+  const svgH = Math.max(mlCy, mrCy) - svgY + 4;
+
+  svg.style.top  = svgY + 'px';
+  svg.style.height = svgH + 'px';
+  svg.setAttribute('viewBox', `0 0 ${dW} ${svgH}`);
+  svg.setAttribute('width', dW);
+
+  // Translate into SVG local coords (SVG top = tlCy)
+  const startY = 0;
+  const lEndY  = mlCy - svgY;
+  const rEndY  = mrCy - svgY;
+  const midY   = Math.min(lEndY, rEndY) * 0.5;
+
+  document.getElementById('arc-left').setAttribute('d',
+    `M${tlCx},${startY} C${tlCx},${midY} ${mlCx},${midY} ${mlCx},${lEndY}`);
+  document.getElementById('arc-right').setAttribute('d',
+    `M${tlCx},${startY} C${tlCx},${midY} ${mrCx},${midY} ${mrCx},${rEndY}`);
+
+  function bezierPt(t, p0, p1, p2, p3) {
+    const u = 1 - t;
+    return u*u*u*p0 + 3*u*u*t*p1 + 3*u*t*t*p2 + t*t*t*p3;
+  }
+  // Sample at t=0.55 — midway down the curve, well away from TL
+  // Use a small lift so text floats just above the line without touching TL
+  const t = 0.55;
+  const lift = 10;
+  const lblLx = bezierPt(t, tlCx, tlCx, mlCx, mlCx);
+  const lblLy = bezierPt(t, startY, midY, midY, lEndY);
+  const lblRx = bezierPt(t, tlCx, tlCx, mrCx, mrCx);
+  const lblRy = bezierPt(t, startY, midY, midY, rEndY);
+
+  const ll1 = document.getElementById('lbl-left-1');
+  const ll2 = document.getElementById('lbl-left-2');
+  const lr1 = document.getElementById('lbl-right-1');
+
+  // Two lines: stack them just above the curve
+  ll1.setAttribute('x', lblLx); ll1.setAttribute('y', lblLy - lift - 32);
+  ll1.textContent = 'Create teams on the fly';
+  ll2.setAttribute('x', lblLx); ll2.setAttribute('y', lblLy - lift - 16);
+  ll2.textContent = 'Supervise lightly or tightly';
+  lr1.setAttribute('x', lblRx); lr1.setAttribute('y', lblRy - lift - 16);
+  lr1.textContent = 'Create teams on the fly';
+}
+</script>
+</body>
+</html>
