@@ -308,16 +308,16 @@ export default function App() {
               </div>
 
               <div className="rounded-xl border border-zinc-800 bg-zinc-950/20 p-3">
-                <a href="/kai-agent-mesh-lead-agent-orchestrated.png" target="_blank" rel="noreferrer">
+                <a href="/kai-agent-mesh-MVDA.jpg" target="_blank" rel="noreferrer">
                   <img
-                    src="/kai-agent-mesh-lead-agent-orchestrated.png"
-                    alt="Agentic mesh orchestrated by a lead AI agent serving the needs of a human in charge"
+                    src="/kai-agent-mesh-MVDA.jpg"
+                    alt="Multi-vector decisioning analyzer (MVDA) for comprehensive, governed and auditable decisioning"
                     className="h-auto w-full rounded-lg"
                     loading="lazy"
                   />
                 </a>
                 <div className="mt-3 text-xs leading-relaxed text-zinc-400">
-                  Agentic mesh orchestrated by a lead AI agent who serves the needs of a human in charge.
+                  Multi-vector decisioning analyzer MVDA for comprehensive, governed and auditable decisioning
                 </div>
                 <div className="mt-1 text-xs text-zinc-500">Click to open full size.</div>
               </div>
