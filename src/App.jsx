@@ -308,14 +308,21 @@ export default function App() {
               </div>
 
               <div className="rounded-xl border border-zinc-800 bg-zinc-950/20 p-3">
-                <a href="/mvda_architecture.html" target="_blank" rel="noreferrer">
+                <div className="relative">
                   <iframe
                     src="/mvda_architecture.html"
                     title="Multi-vector decision analyzer (MVDA) architecture"
-                    className="aspect-video w-full rounded-lg border-0 bg-zinc-950"
+                    className="aspect-video w-full rounded-lg border-0 bg-zinc-950 pointer-events-none"
                     loading="lazy"
                   />
-                </a>
+                  <a
+                    href="/mvda_architecture.html"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="absolute inset-0 rounded-lg"
+                    aria-label="Open MVDA architecture full size"
+                  />
+                </div>
                 <div className="mt-3 text-xs leading-relaxed text-zinc-400">
                   Multi-vector decision analyzer for comprehensive, governed, and auditable decisions
                 </div>
