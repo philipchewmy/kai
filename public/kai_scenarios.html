@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KAI Workspace — Live Scenarios</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: #0a0a0a;
+  font-family: 'DM Sans', sans-serif;
+  min-height: 100vh;
+  padding: 32px 32px 80px;
+  color: #e0dcd4;
+}
+
+/* ── HEADER ── */
+.page-header {
+  width: 954px;
+  margin: 0 auto 28px;
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+}
+.page-title {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #888;
+}
+.page-sub {
+  font-size: 12px;
+  color: #444;
+  font-family: 'DM Mono', monospace;
+}
+
+/* ── DIAGRAM WRAPPER ── */
+.diagram {
+  width: 954px;
+  margin: 0 auto;
+  position: relative;
+}
+
+/* ── SCENARIO BANNER ── */
+.scenario-banner {
+  display: flex;
+  padding-left: 148px;
+  gap: 18px;
+  margin-bottom: 18px;
+}
+.scenario-tag {
+  flex: 1;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  line-height: 1.5;
+  opacity: 0;
+  transform: translateY(-8px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.scenario-tag.visible { opacity: 1; transform: translateY(0); }
+.scenario-tag.left  { background: rgba(124,32,96,0.25); border: 1px solid rgba(124,32,96,0.5); color: #dda0c8; }
+.scenario-tag.right { background: rgba(50,80,150,0.2);  border: 1px solid rgba(80,110,200,0.4); color: #a0b8ee; }
+.scenario-tag .tag-label {
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: inherit;
+  opacity: 0.6;
+  margin-bottom: 3px;
+  display: block;
+}
+.scenario-tag .tag-title { font-size: 12px; font-weight: 600; }
+.scenario-tag .tag-brief { font-size: 11px; opacity: 0.75; margin-top: 2px; }
+
+/* ── TEAM LEADER ── */
+.tl-row {
+  display: flex;
+  padding-left: 148px;
+  justify-content: center;
+  margin-bottom: 0;
+  position: relative;
+  z-index: 3;
+}
+.tl-box {
+  background: #fff8e0;
+  border-radius: 10px;
+  padding: 13px 40px;
+  font-size: 15px;
+  font-weight: 500;
+  color: #1c1408;
+  position: relative;
+}
+.tl-directive {
+  position: absolute;
+  top: -28px;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font-size: 10px;
+  font-family: 'DM Mono', monospace;
+  color: #c9a84c;
+  letter-spacing: 0.06em;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+.tl-directive.show { opacity: 1; }
+
+/* ── SVG ARCS ── */
+.arc-svg {
+  display: block;
+  width: 100%;
+  height: 0;
+  overflow: visible;
+  position: absolute;
+  left: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* ── WORKSPACE ROW ── */
+.workspace-row {
+  display: flex;
+  align-items: flex-start;
+  position: relative;
+  z-index: 2;
+  margin-top: 130px;
+}
+
+/* ── ANNOTATIONS ── */
+.annotations {
+  width: 148px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding-right: 16px;
+  padding-top: 52px;
+}
+.ann-block { text-align: right; margin-bottom: 24px; }
+.ann-line { display: block; font-size: 12px; color: #666; line-height: 1.75; }
+.ann-line.faint { color: #444; }
+.kai-label {
+  writing-mode: vertical-lr;
+  transform: rotate(180deg);
+  font-size: 34px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.06);
+  letter-spacing: 0.04em;
+  margin-top: 18px;
+  user-select: none;
+}
+
+/* ── PODS ── */
+.pods { flex: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 18px; align-items: start; }
+.pod-column { display: flex; flex-direction: column; }
+
+.pod {
+  border: 2px solid #2e2e2e;
+  border-bottom: none;
+  border-radius: 22px 22px 0 0;
+  padding: 0 16px 18px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  margin-top: 24px;
+  transition: border-color 0.5s ease;
+}
+.pod.active-l { border-color: rgba(124,32,96,0.7); }
+.pod.active-r { border-color: rgba(60,90,200,0.6); }
+
+/* ── NODE BASE ── */
+.mod {
+  background: #7c2060;
+  border-radius: 10px;
+  padding: 13px 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #fff;
+  text-align: center;
+  width: calc(33.333% - 7px);
+  align-self: center;
+  margin-top: -24px;
+  margin-bottom: 16px;
+  position: relative;
+  z-index: 3;
+  transition: box-shadow 0.4s ease, background 0.4s ease;
+}
+.mod.lit-l { box-shadow: 0 0 20px 4px rgba(200,80,160,0.5); background: #9e2878; }
+.mod.lit-r { box-shadow: 0 0 20px 4px rgba(80,120,240,0.4); background: #5060c0; }
+
+.dec-obj {
+  background: #363636;
+  border-radius: 10px;
+  padding: 15px 8px;
+  font-size: 12px;
+  color: #bbb;
+  text-align: center;
+  line-height: 1.45;
+  margin-bottom: 6px;
+  width: calc(33.333% - 7px);
+  align-self: center;
+  transition: background 0.4s ease, box-shadow 0.4s ease;
+}
+.dec-obj.lit-l { background: #5a1840; box-shadow: 0 0 12px rgba(200,80,160,0.3); color: #f0c0e0; }
+.dec-obj.lit-r { background: #1a2860; box-shadow: 0 0 12px rgba(80,120,240,0.3); color: #b0c8f8; }
+
+/* Decision content overlay */
+.dec-content {
+  font-size: 9px;
+  font-family: 'DM Mono', monospace;
+  color: inherit;
+  opacity: 0;
+  margin-top: 6px;
+  line-height: 1.6;
+  transition: opacity 0.6s ease;
+  text-align: left;
+}
+.dec-content.show { opacity: 0.85; }
+
+.dec-labels { display: flex; gap: 14px; justify-content: center; margin-bottom: 0; }
+.dec-labels span { font-size: 12px; color: #666; }
+
+.spacer-custom { height: 68px; }
+
+.custom-agents {
+  background: #b05070;
+  border-radius: 10px;
+  padding: 15px 8px;
+  font-size: 13px;
+  color: #fce0ea;
+  text-align: center;
+  line-height: 1.45;
+  width: calc(33.333% - 7px);
+  align-self: center;
+  margin: 10px 0 10px;
+  transition: box-shadow 0.4s ease;
+}
+.custom-agents.lit-r { box-shadow: 0 0 14px rgba(80,120,240,0.4); background: #7060b0; color: #d0d8ff; }
+
+.agent-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-top: 16px; margin-bottom: 10px; }
+.agent {
+  background: #7c2060;
+  border-radius: 10px;
+  padding: 15px 8px;
+  font-size: 12px;
+  color: #fff;
+  text-align: center;
+  line-height: 1.4;
+  transition: background 0.4s ease, box-shadow 0.4s ease;
+  position: relative;
+}
+.agent.lit-l { background: #9e3070; box-shadow: 0 0 10px rgba(200,80,160,0.35); }
+.agent.lit-r { background: #304090; box-shadow: 0 0 10px rgba(80,120,240,0.35); }
+
+/* Activity tag inside agent */
+.agent-activity {
+  font-size: 8.5px;
+  font-family: 'DM Mono', monospace;
+  color: rgba(255,255,255,0.5);
+  display: block;
+  margin-top: 4px;
+  line-height: 1.3;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+.agent-activity.show { opacity: 1; }
+
+.bottom-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+.kai-apps {
+  background: #7c2060;
+  border-radius: 10px;
+  padding: 15px 8px;
+  font-size: 12px;
+  color: #fff;
+  text-align: center;
+  line-height: 1.45;
+  transition: background 0.4s ease;
+}
+.kai-apps.lit-l { background: #9e3070; }
+.kai-apps.lit-r { background: #304090; }
+
+.human {
+  background: #fff8e0;
+  border-radius: 10px;
+  padding: 15px 8px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #1c1408;
+  text-align: center;
+  line-height: 1.45;
+  transition: box-shadow 0.4s ease;
+}
+.human.lit-l { box-shadow: 0 0 12px rgba(200,80,160,0.4); }
+.human.lit-r { box-shadow: 0 0 12px rgba(80,120,240,0.4); }
+
+.tbd {
+  background: transparent;
+  border: 2px solid #5533aa;
+  border-radius: 10px;
+  padding: 15px 8px;
+  font-size: 12px;
+  color: #7755cc;
+  text-align: center;
+}
+
+.aug-pod {
+  border: 2px solid #2e2e2e;
+  border-top: none;
+  border-radius: 0 0 22px 22px;
+  padding: 18px 16px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+  transition: border-color 0.5s ease;
+}
+.aug-pod.active-l { border-color: rgba(124,32,96,0.7); }
+.aug-pod.active-r { border-color: rgba(60,90,200,0.6); }
+
+.aug {
+  border-radius: 12px;
+  padding: 14px 8px;
+  font-size: 12px;
+  color: #fff;
+  text-align: center;
+  transition: filter 0.4s ease, box-shadow 0.4s ease;
+  position: relative;
+}
+.aug.l { background: #c05800; }
+.aug.r { background: #c06800; }
+.aug.lit-l { filter: brightness(1.25); box-shadow: 0 0 8px rgba(220,100,0,0.4); }
+.aug.lit-r { filter: brightness(1.25); box-shadow: 0 0 8px rgba(220,120,0,0.4); }
+.aug-task {
+  font-size: 8px;
+  font-family: 'DM Mono', monospace;
+  color: rgba(255,255,255,0.55);
+  display: block;
+  margin-top: 3px;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+.aug-task.show { opacity: 1; }
+
+/* ── ACTIVITY LOG PANEL ── */
+.log-panel {
+  width: 954px;
+  margin: 24px auto 0;
+  display: grid;
+  grid-template-columns: 148px 1fr 1fr;
+  gap: 18px;
+}
+.log-spacer { /* matches annotation width */ }
+.log-box {
+  border-radius: 14px;
+  padding: 14px 16px;
+  min-height: 120px;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  line-height: 1.7;
+  overflow: hidden;
+}
+.log-box.left  { background: rgba(124,32,96,0.12);  border: 1px solid rgba(124,32,96,0.25); color: #cc88b8; }
+.log-box.right { background: rgba(50,80,160,0.12);   border: 1px solid rgba(60,90,200,0.25);  color: #88a8e8; }
+.log-entry {
+  display: flex;
+  gap: 8px;
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+.log-entry.show { opacity: 1; transform: translateX(0); }
+.log-entry.right-entry { transform: translateX(6px); }
+.log-entry.right-entry.show { transform: translateX(0); }
+.log-time { color: #555; flex-shrink: 0; }
+.log-text { }
+
+/* ── KEYFRAMES ── */
+@keyframes fadeDown { from { opacity:0; transform:translateY(-14px); } to { opacity:1; transform:translateY(0); } }
+@keyframes fadeUp   { from { opacity:0; transform:translateY(16px);  } to { opacity:1; transform:translateY(0); } }
+@keyframes fadeIn   { from { opacity:0; } to { opacity:1; } }
+@keyframes modPulse {
+  0%,100% { box-shadow: 0 0 0 0 rgba(168,50,128,0); }
+  50%     { box-shadow: 0 0 18px 4px rgba(168,50,128,0.3); }
+}
+
+.anim-tl   { animation: fadeDown 1.5s ease both; }
+.anim-arc  { animation: fadeIn  1.8s ease both; }
+.anim-ann  { animation: fadeIn  1.8s ease both; }
+.anim-mod  { animation: fadeDown 1.4s ease both, modPulse 9s 6s ease-in-out infinite; }
+.anim-dec  { animation: fadeDown 1.2s ease both; }
+.anim-cust { animation: fadeIn  1.2s ease both; }
+.anim-ag   { animation: fadeUp  1.0s ease both; }
+.anim-bot  { animation: fadeUp  1.0s ease both; }
+.anim-aug  { animation: fadeUp  0.9s ease both; }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <span class="page-title">KAI Workspace</span>
+  <span class="page-sub">— two live scenarios running in parallel</span>
+</div>
+
+<div class="diagram" id="diagram">
+
+  <!-- SCENARIO BANNERS -->
+  <div class="scenario-banner">
+    <div class="scenario-tag left" id="tag-left">
+      <span class="tag-label">Pod A · Team mbr 1</span>
+      <div class="tag-title">M&amp;A Due Diligence</div>
+      <div class="tag-brief">Keppel evaluating a $2.4B data centre acquisition in Malaysia</div>
+    </div>
+    <div class="scenario-tag right" id="tag-right">
+      <span class="tag-label">Pod B · Team mbr 2</span>
+      <div class="tag-title">Operational Crisis Response</div>
+      <div class="tag-brief">Certis: Changi T2 staffing failure — peak-hour surge undetected</div>
+    </div>
+  </div>
+
+  <!-- TEAM LEADER -->
+  <div class="tl-row">
+    <div class="tl-box" id="tl-box">
+      <div class="tl-directive" id="tl-directive">DISPATCHING TWO CONCURRENT MANDATES</div>
+      Team Leader
+    </div>
+  </div>
+
+  <!-- SVG ARCS -->
+  <svg class="arc-svg" id="arc-svg" xmlns="http://www.w3.org/2000/svg">
+    <path id="arc-left"  stroke="#5a2050" stroke-width="1.5" fill="none" stroke-linecap="round" pathLength="1"/>
+    <path id="arc-right" stroke="#304090" stroke-width="1.5" fill="none" stroke-linecap="round" pathLength="1"/>
+    <text id="lbl-left-1"  font-family="DM Sans, sans-serif" font-size="11" fill="#7a4068" text-anchor="middle"></text>
+    <text id="lbl-left-2"  font-family="DM Sans, sans-serif" font-size="11" fill="#7a4068" text-anchor="middle"></text>
+    <text id="lbl-right-1" font-family="DM Sans, sans-serif" font-size="11" fill="#405080" text-anchor="middle"></text>
+  </svg>
+
+  <!-- WORKSPACE -->
+  <div class="workspace-row">
+    <div class="annotations" id="annotations">
+      <div class="ann-block">
+        <span class="ann-line">People only</span>
+        <span class="ann-line">AI agents only</span>
+        <span class="ann-line">People x AI agents</span>
+      </div>
+      <div class="ann-block">
+        <span class="ann-line faint">Audit-quality</span>
+        <span class="ann-line faint">Decision Ledger</span>
+        <span class="ann-line faint">+ Artifacts</span>
+      </div>
+      <div class="kai-label">Kai workspace</div>
+    </div>
+
+    <div class="pods">
+
+      <!-- LEFT COLUMN — M&A Due Diligence -->
+      <div class="pod-column">
+        <div class="pod" id="pod-left">
+          <div class="mod" id="mod-left">KAI moderator</div>
+
+          <div class="dec-obj" id="dec-left">
+            Decision<br>Object
+            <div class="dec-content" id="dec-left-content">
+              target: DC Asset Co. Sdn Bhd<br>
+              obj: valuation + red flags<br>
+              deadline: 72h
+            </div>
+          </div>
+          <div class="dec-labels">
+            <span>Framing</span><span>Objectives</span><span>Resources</span>
+          </div>
+
+          <div class="spacer-custom" id="spacer-custom"></div>
+
+          <div class="agent-row" id="agents-left">
+            <div class="agent" id="agent-domain-l">
+              Domain<br>Agents
+              <span class="agent-activity" id="act-domain-l">parsing 840pp data room</span>
+            </div>
+            <div class="agent" id="agent-think-l">
+              Thinking<br>Agents
+              <span class="agent-activity" id="act-think-l">modelling 3 valuation scenarios</span>
+            </div>
+            <div class="agent" id="agent-policy-l">
+              Policy<br>Agents
+              <span class="agent-activity" id="act-policy-l">checking BNM & SC rules</span>
+            </div>
+          </div>
+
+          <div class="bottom-row" id="bottom-left">
+            <div class="kai-apps" id="kaiapps-l">Your KAI Apps<br>as Agents</div>
+            <div class="human" id="human-l">Team mbr 1</div>
+            <div class="tbd">TBD</div>
+          </div>
+        </div>
+
+        <div class="aug-pod" id="aug-pod-left">
+          <div class="aug l" id="aug-l-1">Augmented 1<span class="aug-task" id="augt-l-1">extracting financials</span></div>
+          <div class="aug l" id="aug-l-2">Augmented 2<span class="aug-task" id="augt-l-2">title deed checks</span></div>
+          <div class="aug l" id="aug-l-3">Augmented 3<span class="aug-task" id="augt-l-3">env. compliance scan</span></div>
+          <div class="aug l" id="aug-l-4">Augmented 4<span class="aug-task" id="augt-l-4">comparables pull</span></div>
+          <div class="aug l" id="aug-l-5">Augmented 5<span class="aug-task" id="augt-l-5">mgmt background check</span></div>
+          <div class="aug l" id="aug-l-6">Augmented 6<span class="aug-task" id="augt-l-6">cap table analysis</span></div>
+        </div>
+      </div>
+
+      <!-- RIGHT COLUMN — Crisis Response -->
+      <div class="pod-column">
+        <div class="pod" id="pod-right">
+          <div class="mod" id="mod-right">KAI moderator</div>
+
+          <div class="dec-obj" id="dec-right">
+            Decision<br>Object
+            <div class="dec-content" id="dec-right-content">
+              incident: T2 Gate C-D gap<br>
+              obj: restore coverage &lt;15min<br>
+              severity: P1
+            </div>
+          </div>
+          <div class="dec-labels">
+            <span>Framing</span><span>Objectives</span><span>Resources</span>
+          </div>
+
+          <div class="custom-agents" id="custom-agents-box">Sentinel<br>Agents</div>
+
+          <div class="agent-row" id="agents-right">
+            <div class="agent" id="agent-domain-r">
+              Domain<br>Agents
+              <span class="agent-activity" id="act-domain-r">flight surge model active</span>
+            </div>
+            <div class="agent" id="agent-think-r">
+              Thinking<br>Agents
+              <span class="agent-activity" id="act-think-r">root cause: roster misfire</span>
+            </div>
+            <div class="agent" id="agent-policy-r">
+              Policy<br>Agents
+              <span class="agent-activity" id="act-policy-r">CAAS escalation threshold</span>
+            </div>
+          </div>
+
+          <div class="bottom-row" id="bottom-right">
+            <div class="kai-apps" id="kaiapps-r">Your KAI Apps<br>as Agents</div>
+            <div class="human" id="human-r">Team mbr 2</div>
+            <div class="tbd">TBD</div>
+          </div>
+        </div>
+
+        <div class="aug-pod" id="aug-pod-right">
+          <div class="aug r" id="aug-r-1">Augmented 7<span class="aug-task" id="augt-r-1">redeploying officer #341</span></div>
+          <div class="aug r" id="aug-r-2">Augmented 8<span class="aug-task" id="augt-r-2">alerting standby pool</span></div>
+          <div class="aug r" id="aug-r-3">Augmented 9<span class="aug-task" id="augt-r-3">updating T2 heat map</span></div>
+          <div class="aug r" id="aug-r-4">Augmented 10<span class="aug-task" id="augt-r-4">logging incident #C-221</span></div>
+          <div class="aug r" id="aug-r-5">Augmented 11<span class="aug-task" id="augt-r-5">notifying supervisor</span></div>
+          <div class="aug r" id="aug-r-6">Augmented 12<span class="aug-task" id="augt-r-6">recalculating coverage</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ACTIVITY LOGS -->
+<div class="log-panel" id="log-panel">
+  <div class="log-spacer"></div>
+  <div class="log-box left"  id="log-left"></div>
+  <div class="log-box right" id="log-right"></div>
+</div>
+
+<script>
+/* ── BUILD ANIMATION ── */
+const buildStages = [
+  { ids: ['tl-box'],                                      cls: 'anim-tl',   delay: 0    },
+  { ids: ['arc-left','arc-right','lbl-left-1','lbl-left-2','lbl-right-1'], cls: 'anim-arc', delay: 1500 },
+  { ids: ['annotations'],                                 cls: 'anim-ann',  delay: 2100 },
+  { ids: ['mod-left','mod-right'],                        cls: 'anim-mod',  delay: 2700 },
+  { ids: ['dec-left','dec-right'],                        cls: 'anim-dec',  delay: 3300 },
+  { ids: ['custom-agents-box'],                           cls: 'anim-cust', delay: 3600 },
+  { ids: ['agents-left','agents-right'],                  cls: 'anim-ag',   delay: 4050 },
+  { ids: ['bottom-left','bottom-right'],                  cls: 'anim-bot',  delay: 4650 },
+  { ids: ['aug-pod-left','aug-pod-right'],                cls: 'anim-aug',  delay: 5250 },
+];
+
+const allBuildIds = buildStages.flatMap(s => s.ids);
+allBuildIds.forEach(id => {
+  const el = document.getElementById(id);
+  if (el) el.style.opacity = '0';
+});
+// Also hide log panel initially
+document.getElementById('log-panel').style.opacity = '0';
+
+window.addEventListener('load', () => {
+  syncLayout();
+  drawArcs();
+
+  // Build sequence
+  buildStages.forEach(({ ids, cls, delay }) => {
+    setTimeout(() => ids.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) { el.style.opacity = ''; el.classList.add(cls); }
+    }), delay);
+  });
+
+  // Arc draw
+  setTimeout(() => {
+    ['arc-left','arc-right'].forEach(id => {
+      const path = document.getElementById(id);
+      if (!path) return;
+      const len = path.getTotalLength ? path.getTotalLength() : 400;
+      path.style.strokeDasharray  = len;
+      path.style.strokeDashoffset = len;
+      path.style.transition = 'stroke-dashoffset 2.1s ease';
+      path.getBoundingClientRect();
+      path.style.strokeDashoffset = '0';
+    });
+  }, 1500);
+
+  // Scenario activation begins after build completes (~6500ms)
+  setTimeout(activateScenarios, 6800);
+});
+
+window.addEventListener('resize', () => { syncLayout(); drawArcs(); });
+
+/* ── SCENARIO ACTIVATION ── */
+function activateScenarios() {
+  // Show directive on TL
+  document.getElementById('tl-directive').classList.add('show');
+
+  // Show scenario banners
+  setTimeout(() => {
+    document.getElementById('tag-left').classList.add('visible');
+    document.getElementById('tag-right').classList.add('visible');
+  }, 400);
+
+  // Show log panel
+  setTimeout(() => {
+    const lp = document.getElementById('log-panel');
+    lp.style.transition = 'opacity 0.8s ease';
+    lp.style.opacity = '1';
+  }, 800);
+
+  // Activate pod borders
+  setTimeout(() => {
+    document.getElementById('pod-left').classList.add('active-l');
+    document.getElementById('aug-pod-left').classList.add('active-l');
+    document.getElementById('pod-right').classList.add('active-r');
+    document.getElementById('aug-pod-right').classList.add('active-r');
+  }, 600);
+
+  // Left scenario: M&A — sequential node activation
+  const leftScript = [
+    { t: 800,  fn: () => {
+      lit('mod-left','lit-l');
+      log('left', 'MOD', 'mandate received: M&A DD — DC Asset Co.');
+    }},
+    { t: 1800, fn: () => {
+      lit('dec-left','lit-l');
+      show('dec-left-content');
+      log('left', 'DEC', 'decision object initialised');
+    }},
+    { t: 2800, fn: () => {
+      lit('agent-domain-l','lit-l'); show('act-domain-l');
+      log('left', 'DOM', 'ingesting data room — 840 pages');
+    }},
+    { t: 3500, fn: () => {
+      lit('agent-think-l','lit-l'); show('act-think-l');
+      log('left', 'THK', 'building 3 valuation scenarios');
+    }},
+    { t: 4200, fn: () => {
+      lit('agent-policy-l','lit-l'); show('act-policy-l');
+      log('left', 'POL', 'checking BNM + SC regulatory constraints');
+    }},
+    { t: 5000, fn: () => {
+      lit('kaiapps-l','lit-l'); lit('human-l','lit-l');
+      log('left', 'MBR', 'analyst reviewing flagged liabilities');
+    }},
+    { t: 5800, fn: () => {
+      ['aug-l-1','aug-l-2','aug-l-3','aug-l-4','aug-l-5','aug-l-6'].forEach(id => lit(id,'lit-l'));
+      ['augt-l-1','augt-l-2','augt-l-3','augt-l-4','augt-l-5','augt-l-6'].forEach(id => show(id));
+      log('left', 'AUG', '6 workers deployed on parallel extraction');
+    }},
+    { t: 7200, fn: () => {
+      log('left', 'MOD', '↳ preliminary: valuation range $1.9–2.2B, 3 red flags');
+    }},
+  ];
+
+  // Right scenario: Crisis — faster, more urgent cadence
+  const rightScript = [
+    { t: 600,  fn: () => {
+      lit('mod-right','lit-r');
+      log('right', 'MOD', 'P1 incident received: T2 Gate C-D gap');
+    }},
+    { t: 1400, fn: () => {
+      lit('dec-right','lit-r');
+      show('dec-right-content');
+      log('right', 'DEC', 'incident object live — severity P1');
+    }},
+    { t: 2000, fn: () => {
+      lit('custom-agents-box','lit-r');
+      log('right', 'SEN', 'Sentinel agents: T2 spatial model activated');
+    }},
+    { t: 2600, fn: () => {
+      lit('agent-domain-r','lit-r'); show('act-domain-r');
+      log('right', 'DOM', 'flight surge: 3 gates, next 40 min critical');
+    }},
+    { t: 3200, fn: () => {
+      lit('agent-think-r','lit-r'); show('act-think-r');
+      log('right', 'THK', 'root cause: roster misfire at 14:00 shift');
+    }},
+    { t: 3800, fn: () => {
+      lit('agent-policy-r','lit-r'); show('act-policy-r');
+      log('right', 'POL', 'CAAS threshold: escalate if gap > 12 min');
+    }},
+    { t: 4400, fn: () => {
+      lit('kaiapps-r','lit-r'); lit('human-r','lit-r');
+      log('right', 'MBR', 'incident cmdr approving redeployment plan');
+    }},
+    { t: 5200, fn: () => {
+      ['aug-r-1','aug-r-2','aug-r-3','aug-r-4','aug-r-5','aug-r-6'].forEach(id => lit(id,'lit-r'));
+      ['augt-r-1','augt-r-2','augt-r-3','augt-r-4','augt-r-5','augt-r-6'].forEach(id => show(id));
+      log('right', 'AUG', '6 workers executing redeployment in parallel');
+    }},
+    { t: 6400, fn: () => {
+      log('right', 'MOD', '↳ coverage restored at T2 C-D in 11 min');
+    }},
+  ];
+
+  leftScript.forEach( ({ t, fn }) => setTimeout(fn, t) );
+  rightScript.forEach(({ t, fn }) => setTimeout(fn, t) );
+}
+
+function lit(id, cls) {
+  const el = document.getElementById(id);
+  if (el) el.classList.add(cls);
+}
+function show(id) {
+  const el = document.getElementById(id);
+  if (el) el.classList.add('show');
+}
+
+let logLCount = 0, logRCount = 0;
+function log(side, tag, text) {
+  const box = document.getElementById('log-' + side);
+  if (!box) return;
+  const entry = document.createElement('div');
+  entry.className = 'log-entry' + (side === 'right' ? ' right-entry' : '');
+  const now = new Date();
+  const ts = now.getHours().toString().padStart(2,'0') + ':' +
+             now.getMinutes().toString().padStart(2,'0') + ':' +
+             now.getSeconds().toString().padStart(2,'0');
+  entry.innerHTML = `<span class="log-time">${ts}</span><span class="log-text">[${tag}] ${text}</span>`;
+  box.appendChild(entry);
+  // Trigger animation
+  requestAnimationFrame(() => requestAnimationFrame(() => entry.classList.add('show')));
+  // Keep scrolled to bottom
+  box.scrollTop = box.scrollHeight;
+}
+
+/* ── LAYOUT & ARC DRAWING ── */
+function syncLayout() {
+  const customBox = document.getElementById('custom-agents-box');
+  const spacer    = document.getElementById('spacer-custom');
+  if (customBox && spacer) {
+    const style  = getComputedStyle(customBox);
+    spacer.style.height = (customBox.offsetHeight + parseFloat(style.marginTop) + parseFloat(style.marginBottom)) + 'px';
+  }
+}
+
+function drawArcs() {
+  const diagram  = document.getElementById('diagram');
+  const svg      = document.getElementById('arc-svg');
+  const tlBox    = document.getElementById('tl-box');
+  const modLeft  = document.getElementById('mod-left');
+  const modRight = document.getElementById('mod-right');
+
+  function offsetFrom(el, anc) {
+    let top=0, left=0;
+    while (el && el !== anc) { top+=el.offsetTop; left+=el.offsetLeft; el=el.offsetParent; }
+    return {top,left};
+  }
+
+  const dW    = diagram.offsetWidth;
+  const tlOff = offsetFrom(tlBox, diagram);
+  const mlOff = offsetFrom(modLeft, diagram);
+  const mrOff = offsetFrom(modRight, diagram);
+
+  const tlCx = tlOff.left + tlBox.offsetWidth/2;
+  const tlCy = tlOff.top  + tlBox.offsetHeight;
+  const mlCx = mlOff.left + modLeft.offsetWidth/2;
+  const mlCy = mlOff.top;
+  const mrCx = mrOff.left + modRight.offsetWidth/2;
+  const mrCy = mrOff.top;
+
+  const svgY = tlCy;
+  const svgH = Math.max(mlCy,mrCy) - svgY + 4;
+  svg.style.top    = svgY + 'px';
+  svg.style.height = svgH + 'px';
+  svg.setAttribute('viewBox', `0 0 ${dW} ${svgH}`);
+  svg.setAttribute('width', dW);
+
+  const startY=0, lEndY=mlCy-svgY, rEndY=mrCy-svgY;
+  const midY = Math.min(lEndY,rEndY)*0.5;
+
+  document.getElementById('arc-left').setAttribute('d',
+    `M${tlCx},${startY} C${tlCx},${midY} ${mlCx},${midY} ${mlCx},${lEndY}`);
+  document.getElementById('arc-right').setAttribute('d',
+    `M${tlCx},${startY} C${tlCx},${midY} ${mrCx},${midY} ${mrCx},${rEndY}`);
+
+  function bp(t,p0,p1,p2,p3){ const u=1-t; return u*u*u*p0+3*u*u*t*p1+3*u*t*t*p2+t*t*t*p3; }
+  const t=0.55, lift=10;
+  const lblLx=bp(t,tlCx,tlCx,mlCx,mlCx), lblLy=bp(t,startY,midY,midY,lEndY);
+  const lblRx=bp(t,tlCx,tlCx,mrCx,mrCx), lblRy=bp(t,startY,midY,midY,rEndY);
+
+  document.getElementById('lbl-left-1').setAttribute('x',lblLx);
+  document.getElementById('lbl-left-1').setAttribute('y',lblLy-lift-32);
+  document.getElementById('lbl-left-1').textContent='Create teams on the fly';
+  document.getElementById('lbl-left-2').setAttribute('x',lblLx);
+  document.getElementById('lbl-left-2').setAttribute('y',lblLy-lift-16);
+  document.getElementById('lbl-left-2').textContent='Supervise lightly or tightly';
+  document.getElementById('lbl-right-1').setAttribute('x',lblRx);
+  document.getElementById('lbl-right-1').setAttribute('y',lblRy-lift-16);
+  document.getElementById('lbl-right-1').textContent='Create teams on the fly';
+}
+</script>
+</body>
+</html>

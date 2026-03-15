@@ -1,7 +1,9 @@
 import { ArrowRight, Award, Binary, GraduationCap, Layers, Mail } from 'lucide-react'
 import { motion } from 'framer-motion'
+import { useState } from 'react'
 
 export default function App() {
+  const [showScenarios, setShowScenarios] = useState(false)
   return (
     <div className="min-h-screen bg-gradient-to-b from-zinc-950 via-zinc-950 to-zinc-900 text-zinc-50">
       <header className="mx-auto flex w-full max-w-6xl flex-col items-start justify-between gap-3 px-6 py-6 md:flex-row md:items-center">
@@ -289,6 +291,33 @@ export default function App() {
                 <div className="mt-3 text-xs leading-relaxed text-zinc-400">
                   Tightly-coupled, human-in-charge-and-orchestrated.
                 </div>
+                <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-2 text-xs">
+                  <button
+                    type="button"
+                    onClick={() => setShowScenarios((current) => !current)}
+                    className="text-zinc-400 hover:text-zinc-200"
+                  >
+                    {showScenarios ? 'Hide scenarios' : 'View scenarios'}
+                  </button>
+                  <a
+                    href="/kai_scenarios.html"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-zinc-400 hover:text-zinc-200"
+                  >
+                    Open scenarios full size
+                  </a>
+                </div>
+                {showScenarios ? (
+                  <div className="mt-3 rounded-lg border border-zinc-800 bg-zinc-950/30 p-2">
+                    <iframe
+                      src="/kai_scenarios.html"
+                      title="KAI scenarios animations"
+                      className="w-full rounded-md border-0 bg-zinc-950 h-[435px] md:h-[533px]"
+                      loading="lazy"
+                    />
+                  </div>
+                ) : null}
                 <div className="mt-1 text-xs text-zinc-500">Click to open full size.</div>
               </div>
 
