@@ -297,7 +297,7 @@ export default function App() {
                   <iframe
                     src="/kai_workspace_architecture.html"
                     title="Human-led governed agent mesh architecture"
-                    className="w-full rounded-lg border-0 bg-zinc-950 pointer-events-none h-[544px] md:h-[666px]"
+                    className="w-full rounded-lg border-0 bg-zinc-950 pointer-events-none h-[435px] md:h-[533px]"
                     loading="lazy"
                   />
                   <a
@@ -319,7 +319,7 @@ export default function App() {
                   <iframe
                     src="/mvda_architecture.html"
                     title="Multi-vector decision analyzer (MVDA) architecture"
-                    className="aspect-video w-full rounded-lg border-0 bg-zinc-950 pointer-events-none"
+                    className="w-full rounded-lg border-0 bg-zinc-950 pointer-events-none h-[360px] md:h-[450px]"
                     loading="lazy"
                   />
                   <a
