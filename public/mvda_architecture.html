@@ -11,7 +11,7 @@
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --bg:          #0e0f0d;
+    --bg:          #000000;
     --bg3:         #1a1b18;
     --line:        rgba(255,255,255,0.055);
     --line2:       rgba(255,255,255,0.12);
@@ -50,11 +50,7 @@
 
   body {
     min-height: 100vh;
-    background:
-      linear-gradient(var(--line) 1px, transparent 1px),
-      linear-gradient(90deg, var(--line) 1px, transparent 1px),
-      var(--bg);
-    background-size: 48px 48px, 48px 48px, auto;
+    background: var(--bg);
     padding-bottom: 100px;
     overflow-x: hidden;
   }
