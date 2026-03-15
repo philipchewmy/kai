@@ -309,12 +309,19 @@ export default function App() {
                   </a>
                 </div>
                 {showScenarios ? (
-                  <div className="mt-3 rounded-lg border border-zinc-800 bg-zinc-950/30 p-2">
+                  <div className="relative mt-3 rounded-lg border border-zinc-800 bg-zinc-950/30 p-2">
                     <iframe
                       src="/kai_scenarios.html"
                       title="KAI scenarios animations"
-                      className="w-full rounded-md border-0 bg-zinc-950 h-[435px] md:h-[533px]"
+                      className="w-full rounded-md border-0 bg-zinc-950 pointer-events-none h-[435px] md:h-[533px]"
                       loading="lazy"
+                    />
+                    <a
+                      href="/kai_scenarios.html"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="absolute inset-0 rounded-md"
+                      aria-label="Open scenarios full size"
                     />
                   </div>
                 ) : null}
