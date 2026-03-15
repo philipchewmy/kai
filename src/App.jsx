@@ -266,28 +266,6 @@ export default function App() {
           </div>
 
           <div className="mt-4 overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-950/40">
-            <div className="flex items-center justify-between gap-4 border-b border-zinc-800 px-6 py-4">
-              <div className="text-sm font-medium text-zinc-200">KAI OS architecture</div>
-              <a
-                href="/kai-os-architecture.png"
-                target="_blank"
-                rel="noreferrer"
-                className="text-xs text-zinc-400 hover:text-zinc-200"
-              >
-                Open full size
-              </a>
-            </div>
-            <div className="p-4 md:p-6">
-              <img
-                src="/kai-os-architecture.png"
-                alt="KAI OS architecture diagram"
-                className="h-auto w-full rounded-xl border border-zinc-800 bg-zinc-950/20"
-                loading="lazy"
-              />
-            </div>
-          </div>
-
-          <div className="mt-4 overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-950/40">
             <div className="border-b border-zinc-800 px-6 py-4">
               <div className="text-sm font-medium text-zinc-200">Governed agent mesh examples</div>
             </div>
@@ -335,6 +313,28 @@ export default function App() {
                 </div>
                 <div className="mt-1 text-xs text-zinc-500">Click to open full size.</div>
               </div>
+            </div>
+          </div>
+
+          <div className="mt-4 overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-950/40">
+            <div className="flex items-center justify-between gap-4 border-b border-zinc-800 px-6 py-4">
+              <div className="text-sm font-medium text-zinc-200">KAI OS architecture</div>
+              <a
+                href="/kai-os-architecture.png"
+                target="_blank"
+                rel="noreferrer"
+                className="text-xs text-zinc-400 hover:text-zinc-200"
+              >
+                Open full size
+              </a>
+            </div>
+            <div className="p-4 md:p-6">
+              <img
+                src="/kai-os-architecture.png"
+                alt="KAI OS architecture diagram"
+                className="h-auto w-full rounded-xl border border-zinc-800 bg-zinc-950/20"
+                loading="lazy"
+              />
             </div>
           </div>
 
