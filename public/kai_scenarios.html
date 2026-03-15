@@ -37,6 +37,31 @@ body {
   font-family: 'DM Mono', monospace;
 }
 
+.replay-btn {
+  margin-left: auto;
+  border: 1px solid rgba(255,255,255,0.16);
+  background: rgba(255,255,255,0.04);
+  color: #b6b6b6;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border-radius: 10px;
+  padding: 10px 14px;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.replay-btn:hover {
+  background: rgba(255,255,255,0.07);
+  border-color: rgba(255,255,255,0.24);
+  color: #e2e2e2;
+}
+
+.replay-btn:active {
+  transform: translateY(1px);
+}
+
 /* ── DIAGRAM WRAPPER ── */
 .diagram {
   width: 954px;
@@ -404,6 +429,7 @@ body {
 <div class="page-header">
   <span class="page-title">KAI Workspace</span>
   <span class="page-sub">— two live scenarios running in parallel</span>
+  <button class="replay-btn" id="replay">Replay</button>
 </div>
 
 <div class="diagram" id="diagram">
@@ -620,6 +646,10 @@ window.addEventListener('load', () => {
 
   // Scenario activation begins after build completes (~6500ms)
   setTimeout(activateScenarios, 6800);
+});
+
+document.getElementById('replay').addEventListener('click', () => {
+  window.location.reload();
 });
 
 window.addEventListener('resize', () => { syncLayout(); drawArcs(); });
