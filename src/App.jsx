@@ -200,24 +200,38 @@ export default function App() {
               <div className="flex items-center gap-2 text-sm font-medium text-zinc-200">
                 <Binary size={16} /> Event-driven physics (1990s)
               </div>
-              <div className="mt-3 text-sm leading-relaxed text-zinc-400">
-                Staged filtering and reconstruction to extract sparse signal from high-noise environments under bounded resources.
+              <div className="mt-3 space-y-3 text-sm leading-relaxed text-zinc-400">
+                <p>Staged filtering and reconstruction to extract sparse signal from high-noise environments under bounded resources.</p>
+                <p>
+                  The foundation: the discipline of mathematical distillation—isolating the "true" signal from physical chaos.
+                </p>
               </div>
             </div>
             <div className="rounded-2xl border border-zinc-800 bg-zinc-950/40 p-6">
               <div className="flex items-center gap-2 text-sm font-medium text-zinc-200">
                 <Layers size={16} /> Deterministic platforms (2000s–2010s)
               </div>
-              <div className="mt-3 text-sm leading-relaxed text-zinc-400">
-                Identical inputs produce identical outputs: valuation graphs, factor decompositions, and data lineage for auditability - foundations for institutional trust, safeguarding $40T in Aladdin. Ontological. End-to-end modeling, from economics, to markets & market structure, to securities structure, and portfolio construction.
+              <div className="mt-3 space-y-3 text-sm leading-relaxed text-zinc-400">
+                <p>
+                  Identical inputs produce identical outputs: valuation graphs, factor decompositions, and data lineage for auditability -
+                  foundations for institutional trust, safeguarding $40T in Aladdin.
+                </p>
+                <p>
+                  Ontological. End-to-end modeling, from economics, to markets & market structure, to securities structure, and portfolio
+                  construction. The era where wisdom was codified into a single, immutable version of the truth.
+                </p>
               </div>
             </div>
             <div className="rounded-2xl border border-zinc-800 bg-zinc-950/40 p-6">
               <div className="flex items-center gap-2 text-sm font-medium text-zinc-200">
                 <ArrowRight size={16} /> Governed intelligence (2019–2026)
               </div>
-              <div className="mt-3 text-sm leading-relaxed text-zinc-400">
-                Policy-bounded probabilistic inference with observability: audit logs, confidence thresholds, and human escalation.
+              <div className="mt-3 space-y-3 text-sm leading-relaxed text-zinc-400">
+                <p>Policy-bounded probabilistic inference with observability: audit logs, confidence thresholds, and human escalation.</p>
+                <p>
+                  This is KAI: it distills our collective wisdom and intelligence and unleashes them across the enterprise. We move from
+                  hard-coded logic to the institutionalization of human judgment within a probabilistic framework.
+                </p>
               </div>
             </div>
           </div>
