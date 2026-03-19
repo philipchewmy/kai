@@ -202,7 +202,7 @@ export default function App() {
               </div>
               <div className="mt-3 space-y-3 text-sm leading-relaxed text-zinc-400">
                 <p>Staged filtering and reconstruction to extract sparse signal from high-noise environments under bounded resources.</p>
-                <p>
+                <p className="text-zinc-500">
                   The foundation: the discipline of mathematical distillation—isolating the "true" signal from physical chaos.
                 </p>
               </div>
@@ -216,7 +216,7 @@ export default function App() {
                   Identical inputs produce identical outputs: valuation graphs, factor decompositions, and data lineage for auditability -
                   foundations for institutional trust, safeguarding $40T in Aladdin.
                 </p>
-                <p>
+                <p className="text-zinc-500">
                   Ontological. End-to-end modeling, from economics, to markets & market structure, to securities structure, and portfolio
                   construction. The era where wisdom was codified into a single, immutable version of the truth.
                 </p>
@@ -228,7 +228,7 @@ export default function App() {
               </div>
               <div className="mt-3 space-y-3 text-sm leading-relaxed text-zinc-400">
                 <p>Policy-bounded probabilistic inference with observability: audit logs, confidence thresholds, and human escalation.</p>
-                <p>
+                <p className="text-zinc-500">
                   This is KAI: it distills our collective wisdom and intelligence and unleashes them across the enterprise. We move from
                   hard-coded logic to the institutionalization of human judgment within a probabilistic framework.
                 </p>
